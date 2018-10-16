@@ -6,3 +6,5 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['save2pdf/certificate'] = 'c_save_to_pdf/sertifikat';
+
+$route['__insertDataUser'] = 'c_dashboard/insertDataUser';
