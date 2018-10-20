@@ -15,10 +15,11 @@
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
-        <link href="<?php echo base_url('assets/bootstrap/css/bootstrap-theme.min.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/bootstrap/css/bootstrap-theme.min.css'); ?>" rel="stylesheet">
 
     <link href="<?php echo base_url('assets/animate/animate.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/fontawesome/css/font-awesome.min.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/toastr/toastr.min.css'); ?>" rel="stylesheet">
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="<?php echo base_url('assets/bootstrap/js/jquery.min.js'); ?>"></script>
@@ -26,6 +27,7 @@
     <script src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js'); ?>"></script>
 
     <script src="<?php echo base_url('assets/moment/moment.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/toastr/toastr.min.js'); ?>"></script>
 </head>
 
 

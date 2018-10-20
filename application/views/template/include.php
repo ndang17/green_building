@@ -3,6 +3,24 @@
 
     window.base_url_js = "<?php echo base_url(); ?>";
 
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-bottom-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
     function dateTimeNow() {
         return moment().format('YYYY-MM-DD H:mm:ss');
     }
@@ -18,5 +36,9 @@
             }
 
         });
+    }
+    
+    function g() {
+        
     }
 </script>
