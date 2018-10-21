@@ -19,13 +19,52 @@ class C_api extends CI_Controller {
     public function crudQuestion(){
         $data_arr = $this->input->post('dataForm');
 
+//        print_r($data_arr);
 
         if($data_arr['action']=='loadLabel'){
 
-            $data = $this->db->order_by('ID','ASC')->get_where('green.q_label',
-                array('IDTitle',$data_arr['IDTitle']))->result_array();
+            $data = $this->db->query('SELECT * FROM green.q_label ql 
+                                                WHERE ql.IDTitle = "'.$data_arr['IDTitle'].'" ')->result_array();
 
             return print_r(json_encode($data));
+        }
+        else if($data_arr['action']=='addQType3'){
+            $dataInsert = (array) $data_arr['dataInsert'];
+            $this->db->insert('green.q_question',$dataInsert);
+            return print_r(1);
+        }
+        else if($data_arr['action']=='addQType2'){
+            $dataInsert = (array) $data_arr['dataInsert'];
+            $this->db->insert('green.q_question',$dataInsert);
+            $insert_id = $this->db->insert_id();
+
+            $ArrMulty = (array) $data_arr['ArrMulty'];
+            for($i=0;$i<count($ArrMulty);$i++){
+                $ArrMulty[$i]['IDQ'] = $insert_id;
+                $this->db->insert('green.q_type_2',$ArrMulty[$i]);
+            }
+
+            return print_r(1);
+        }
+        else if($data_arr['action']=='addQType1'){
+
+            $dataInsert = (array) $data_arr['dataInsert'];
+            $this->db->insert('green.q_question',$dataInsert);
+            $IDQ = $this->db->insert_id();
+
+            $ArrLabel = (array) $data_arr['ArrLabel'];
+            for($i=0;$i<count($ArrLabel);$i++){
+                $ArrLabel[$i]['IDQ'] = $IDQ;
+                $this->db->insert('green.q_type_1',$ArrLabel[$i]);
+            }
+
+            $ArrRange = (array) $data_arr['ArrRange'];
+            for($r=0;$r<count($ArrRange);$r++){
+                $ArrRange[$r]['IDQ'] = $IDQ;
+                $this->db->insert('green.q_type_1_range',$ArrRange[$r]);
+            }
+
+            return print_r(1);
         }
     }
 
@@ -88,7 +127,49 @@ class C_api extends CI_Controller {
 
         }
         else if($data_arr['action']=='addLabel'){
+            $dataForm = (array) $data_arr['dataForm'];
+            $this->db->insert('green.q_label', $dataForm);
+            return print_r(1);
+        }
+    }
 
+    public function crudPurpose(){
+        $data_arr = $this->input->post('dataForm');
+
+        if($data_arr['action']=='readPerpu'){
+            $data = $this->db->order_by('ID','ASC')
+                ->get('green.q_title')->result_array();
+
+            if(count($data)>0){
+                for($i=0;$i<count($data);$i++){
+                    $dataPerpu = $this->db->get_where('green.perpu',
+                        array('IDTitle' => $data[$i]['ID']))->result_array();
+                    $data[$i]['Perpu'] = $dataPerpu;
+                }
+            }
+
+            return print_r(json_encode($data));
+        }
+        else if($data_arr['action']=='addPerpu'){
+            $formInsert = (array) $data_arr['formInsert'];
+            $this->db->insert('green.perpu',$formInsert);
+            return print_r(1);
+        }
+        else if($data_arr['action']=='editPerpu'){
+            $formInsert = (array) $data_arr['formInsert'];
+            $this->db->where('ID', $data_arr['ID']);
+            $this->db->update('green.perpu',$formInsert);
+            return print_r(1);
+        }
+        else if($data_arr['action']=='loadPerpu'){
+            $ID = $data_arr['ID'];
+            $data = $this->db->get_where('green.perpu',array('ID' => $ID),1)->result_array();
+            return print_r(json_encode($data));
+        }
+        else if($data_arr['action']=='deletePerpu'){
+            $this->db->where('ID', $data_arr['ID']);
+            $this->db->delete('green.perpu');
+            return print_r(1);
         }
     }
 

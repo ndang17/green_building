@@ -28,6 +28,10 @@
 
     <script src="<?php echo base_url('assets/moment/moment.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/toastr/toastr.min.js'); ?>"></script>
+
+    <!-- include summernote css/js -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 </head>
 
 
@@ -67,8 +71,8 @@
         <div class="col-md-3">
             <div class="">
                 <div class="list-group">
-                    <a href="<?php echo base_url('admin/add-question'); ?>" class="list-group-item <?php if($this->uri->segment(2)=='add-question' || $this->uri->segment(2)=='title-label'){echo 'active';} ?>"><i class="fa fa-edit margin-right"></i> Master</a>
-                    <a href="<?php echo base_url('admin/question'); ?>" class="list-group-item <?php if($this->uri->segment(2)=='question'){echo 'active';} ?>"><i class="fa fa-th-list margin-right"></i> Question</a>
+                    <a href="<?php echo base_url('admin/master/add-question'); ?>" class="list-group-item <?php if($this->uri->segment(2)=='master'){echo 'active';} ?>"><i class="fa fa-database margin-right"></i> Master</a>
+                    <a href="<?php echo base_url('admin/question/list'); ?>" class="list-group-item <?php if($this->uri->segment(2)=='question'){echo 'active';} ?>"><i class="fa fa-question-circle margin-right"></i> Question</a>
                     <a href="<?php echo base_url('admin/users'); ?>" class="list-group-item <?php if($this->uri->segment(2)=='users'){echo 'active';} ?>"><i class="fa fa-users margin-right"></i> Users</a>
                     <a href="<?php echo base_url('admin/statistik'); ?>" class="list-group-item <?php if($this->uri->segment(2)=='statistik'){echo 'active';} ?>"><i class="fa fa-bar-chart margin-right"></i> Statistik</a>
                     <a href="<?php echo base_url('admin/out'); ?>" class="list-group-item <?php if($this->uri->segment(2)=='out'){echo 'active';} ?>"><i class="fa fa-sign-out margin-right"></i> Logout</a>

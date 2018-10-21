@@ -71,6 +71,22 @@ insert  into `jobs`(`ID`,`Description`) values
 (4,'Manajemen Konstruksi'),
 (5,'Building Manajemen');
 
+/*Table structure for table `perpu` */
+
+DROP TABLE IF EXISTS `perpu`;
+
+CREATE TABLE `perpu` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `IDTitle` int(11) NOT NULL,
+  `Perpu` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+/*Data for the table `perpu` */
+
+insert  into `perpu`(`ID`,`IDTitle`,`Perpu`) values 
+(2,1,'<p>AREA DASAR HIJAU<span style=\"white-space:pre\">			</span></p><p>TUJUAN<span style=\"white-space:pre\">				</span></p><p>Memelihara atau memperluas kehijauan kota untuk meningkatkan kualitas iklim mikro, mengurangi CO2 dan zat polutan, mencegah erosi tanah, mengurangi beban sistem drainase, menjaga keseimbangan neraca air bersih dan sistem air tanah.<span style=\"white-space:pre\">				</span></p><p>TOLOK UKUR<span style=\"white-space:pre\">				</span></p><p><span style=\"white-space:pre\">		</span>Adanya area lansekap berupa vegetasi (softscape) yang bebas dari struktur bangunan dan struktur sederhana bangunan taman (hardscape) di atas permukaan tanah atau di bawah tanah.&nbsp; <span style=\"white-space:pre\">		</span></p><p><span style=\"white-space:pre\">		</span>a. Untuk konstruksi baru, luas areanya adalah minimal 10% dari luas total lahan.<span style=\"white-space:pre\">		</span></p><p><span style=\"white-space:pre\">		</span>b. Untuk renovasi utama (major renovation), luas areanya adalah minimal 50% dari ruang terbuka yang bebas basement dalam tapak <span style=\"white-space:pre\">		</span></p><p><span style=\"white-space:pre\">				</span></p><p><span style=\"white-space:pre\">		</span>Area ini memiliki vegetasi mengikuti Permendagri No 1 tahun 2007 Pasal 13 (2a) dengan komposisi 50% lahan tertutupi luasan pohon ukuran kecil, ukuran sedang, ukuran besar, perdu setengah pohon, perdu, semak dalam ukuran dewasa, dengan jenis tanaman mempertimbangkan Peraturan Menteri PU No. 5/PRT/M/2008 mengenai Ruang Terbuka Hijau (RTH) Pasal&nbsp; 2.3.1&nbsp; tentang Kriteria Vegetasi untuk Pekarangan<span style=\"white-space:pre\">		</span></p><div><br></div>');
+
 /*Table structure for table `q_label` */
 
 DROP TABLE IF EXISTS `q_label`;
@@ -83,7 +99,7 @@ CREATE TABLE `q_label` (
   `Purpose` text,
   `TotalPoint` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `q_label` */
 
@@ -94,7 +110,9 @@ insert  into `q_label`(`ID`,`IDTitle`,`Code`,`Label`,`Purpose`,`TotalPoint`) val
 (4,1,'ADS4','Fasilitas Pengguna Sepeda','Mendorong penggunaan sepeda bagi pengguna gedung dengan memberikan  fasilitas yang memadai sehingga dapat mengurangi penggunaan kendaraan bermotor.',2),
 (5,1,'ADS5','Lansekap pada Lahan','Memelihara atau memperluas kehijauan kota untuk meningkatkan kualitas iklim  mikro, mengurangi CO  dan zat polutan, mencegah erosi tanah, mengurangi 2 beban sistem drainase, menjaga keseimbangan neraca air bersih dan sistem air tanah.',3),
 (6,1,'ADS6','Iklim Mikro','Meningkatkan kualitas iklim mikro di sekitar gedung yang mencakup kenyamanan  manusia dan habitat sekitar gedung.',3),
-(7,1,'ADS7','Manajemen Air Limpasan Hujan','Mengurangi beban sistem drainase lingkungan dari kuantitas limpasan air hujan  dengan sistem manajemen air hujan secara terpadu.',3);
+(7,1,'ADS7','Manajemen Air Limpasan Hujan','Mengurangi beban sistem drainase lingkungan dari kuantitas limpasan air hujan  dengan sistem manajemen air hujan secara terpadu.',3),
+(8,2,'EEC1','Efisiensi dan Konservasi Energi','Mendorong penghematan konsumsi energi melalui aplikasi langkah-langkah  efisiensi energi',15),
+(9,2,'ECC2','Pencahayaan Alami','Mendorong penggunaan pencahayaan alami yang optimal untuk mengurangi  konsumsi energi dan mendukung desain bangunan yang memungkinkan pencahayaan alami semaksimal mungkin.',4);
 
 /*Table structure for table `q_question` */
 
@@ -104,17 +122,19 @@ CREATE TABLE `q_question` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `IDTitle` int(11) NOT NULL,
   `IDLabel` int(11) NOT NULL,
-  `Order` int(11) DEFAULT NULL,
+  `Order` varchar(11) DEFAULT NULL,
   `Question` text,
   `Type` enum('1','2','3') DEFAULT NULL COMMENT '1 = Berkar, 2 = pilihan ganda, 3 = Isi langsung',
   `Point` int(11) DEFAULT NULL COMMENT 'Jika Type = 3 gunakan poin ini',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `q_question` */
 
 insert  into `q_question`(`ID`,`IDTitle`,`IDLabel`,`Order`,`Question`,`Type`,`Point`) values 
-(1,1,1,1,'Memilih daerah pembangunan yang dilengkapi minimal delapan dari 12 prasarana sarana kota.','1',NULL);
+(1,1,5,'1A','Adanya area lansekap berupa vegetasi (softscape) yang bebas dari bangunan taman (hardscape) yang terletak di atas permukaan tanah seluas minimal 40% luas total lahan. Luas area yang diperhitungkan adalah termasuk yang tersebut di Prasyarat 1, taman di atas basement,  roof garden, terrace garden, dan wall garden, dengan mempertimbangkan Peraturan Menteri PU No. 5/PRT/M/2008 mengenai Ruang Terbuka Hijau (RTH) Pasal 2.3.1  tentang Kriteria Vegetasi untuk Pekarangan.','3',1),
+(2,1,1,'2','question ok','2',NULL),
+(3,1,1,'2','tes type 1','1',NULL);
 
 /*Table structure for table `q_title` */
 
@@ -156,7 +176,7 @@ DROP TABLE IF EXISTS `q_type_1_range`;
 
 CREATE TABLE `q_type_1_range` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `IDT1` int(11) NOT NULL,
+  `IDQ` int(11) NOT NULL,
   `Start` int(11) DEFAULT NULL,
   `End` int(11) DEFAULT NULL,
   `Point` int(11) DEFAULT NULL,
@@ -200,21 +220,6 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `user` */
-
-/*Table structure for table `uu` */
-
-DROP TABLE IF EXISTS `uu`;
-
-CREATE TABLE `uu` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `IDTitle` int(11) NOT NULL,
-  `Heading` varchar(100) DEFAULT NULL,
-  `Purpose` text,
-  `Benchmark` text,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-/*Data for the table `uu` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
