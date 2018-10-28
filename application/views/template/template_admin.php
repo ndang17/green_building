@@ -21,6 +21,8 @@
     <link href="<?php echo base_url('assets/fontawesome/css/font-awesome.min.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/toastr/toastr.min.css'); ?>" rel="stylesheet">
 
+    <link href="<?php echo base_url('assets/checkbox/checkbox.css'); ?>" rel="stylesheet">
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="<?php echo base_url('assets/bootstrap/js/jquery.min.js'); ?>"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

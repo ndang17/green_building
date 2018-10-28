@@ -17,6 +17,15 @@ class C_dashboard extends CI_Controller {
         $this->temp($page);
     }
 
+
+    public function pengujian()
+    {
+//        $data['dataJob'] = $this->db->order_by('ID','ASC')->get('green.jobs')->result_array();
+//        $data['dataCriteria'] = $this->db->order_by('ID','ASC')->get('green.eligibility_criteria')->result_array();
+        $page = $this->load->view('page/pengujian','',true);
+        $this->temp($page);
+    }
+
     public function insertDataUser(){
         $dataForm = $this->input->post('dataForm');
 

@@ -8,6 +8,8 @@ class C_api extends CI_Controller {
         parent::__construct();
         header('Access-Control-Allow-Origin: *');
         header('Content-Type: application/json');
+
+        $this->load->model('m_api');
     }
 
     public function getTitle(){
@@ -18,8 +20,6 @@ class C_api extends CI_Controller {
 
     public function crudQuestion(){
         $data_arr = $this->input->post('dataForm');
-
-//        print_r($data_arr);
 
         if($data_arr['action']=='loadLabel'){
 
@@ -66,6 +66,49 @@ class C_api extends CI_Controller {
 
             return print_r(1);
         }
+
+        else if($data_arr['action']=='readQuestion'){
+            $IDTitle = $data_arr['IDTitle'];
+            $data = $this->m_api->__getQuestion($IDTitle);
+
+            return print_r(json_encode($data));
+        }
+
+        else if($data_arr['action']=='deleteQuestion'){
+            $IDQ = $data_arr['IDQ'];
+            $this->db->where('ID', $IDQ);
+            $this->db->delete('green.q_question');
+
+            $this->db->where('IDQ', $IDQ);
+            $this->db->delete(array('green.q_type_1','green.q_type_1_range','green.q_type_2'));
+
+            return print_r(1);
+        }
+
+        else if($data_arr['action']='deleteLableInQuestion'){
+            $IDLable = $data_arr['IDLabel'];
+            $this->db->where('ID', $IDLable);
+            $this->db->delete('green.q_label');
+
+            //get IDQ in label
+            $dataQ = $this->db->query('SELECT ID FROM green.q_question q 
+                                                WHERE q.IDLabel = "'.$IDLable.'" ')->result_array();
+
+            if(count($dataQ)>0){
+                for($i=0;$i<count($dataQ);$i++){
+                    $this->db->where('IDQ', $dataQ[$i]['ID']);
+                    $this->db->delete(array('green.q_type_1','green.q_type_1_range','green.q_type_2'));
+                    $this->db->reset_query();
+                }
+            }
+
+            $this->db->where('IDLabel', $IDLable);
+            $this->db->delete('green.q_question');
+
+            return print_r(1);
+
+        }
+
     }
 
     public function crudTitle(){

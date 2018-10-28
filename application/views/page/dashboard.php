@@ -47,7 +47,7 @@
 <!--<img src="--><?php //echo base_url('assets/images/slider/1.jpg'); ?><!--" style="width: 100%;">-->
 
 
-<div class="image-container set-full-height" style="background-image: url('http://demos.creative-tim.com/material-bootstrap-wizard/assets/img/wizard-book.jpg');padding-bottom: 50px;">
+<div class="image-container set-full-height" style="background-image: url('<?php echo base_url("assets/images/bg/wizard-book.jpg"); ?>');padding-bottom: 50px;">
 
 
     <div  style="background: #0000008c;margin-bottom: 30px;padding: 15px;">
@@ -251,7 +251,7 @@
 
                                 <div class="col-md-12 text-right">
                                     <hr/>
-                                    <button class="btn btn-fill btn-danger" id="btnMulai">Mulai Uji Kelayakan</button>
+                                    <button class="btn btn-fill btn-danger" id="btnMulai">Submit</button>
                                 </div>
                             </div>
 
@@ -310,8 +310,13 @@
     });
 
     $('#btnMulai').click(function () {
-        saveData();
-        // $('#modalMedium').modal('show');
+        // saveData();
+        $('#modalMedium .modal-header,#modalMedium .modal-footer').addClass('hide');
+        $('#modalMedium .modal-body').html('<div style="text-align:center ;">' +
+            '<h3>Mulai tahap pengujia sekarang?</h3>' +
+            '<button class="btn btn-success">Ya, mulai</button> <button class="btn btn-default"  data-dismiss="modal">Tidak, nanti saja</button>' +
+            '</div>');
+        $('#modalMedium').modal('show');
     });
 
 

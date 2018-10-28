@@ -9,6 +9,10 @@ $route['save2pdf/certificate'] = 'c_save_to_pdf/sertifikat';
 
 $route['__insertDataUser'] = 'c_dashboard/insertDataUser';
 
+// Pengujian
+$route['tahap-pengujian'] = 'c_dashboard/pengujian';
+
+
 // === ADMIN MASTER ===
 $route['admin/master/add-question'] = 'c_admin/addQuestion';
 $route['admin/master/label'] = 'c_admin/label';
