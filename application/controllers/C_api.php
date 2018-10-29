@@ -185,7 +185,7 @@ class C_api extends CI_Controller {
 
             if(count($data)>0){
                 for($i=0;$i<count($data);$i++){
-                    $dataPerpu = $this->db->get_where('green.perpu',
+                    $dataPerpu = $this->db->select('ID as IDPerpu,Perpu')->get_where('green.perpu',
                         array('IDTitle' => $data[$i]['ID']))->result_array();
                     $data[$i]['Perpu'] = $dataPerpu;
                 }

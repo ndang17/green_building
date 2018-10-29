@@ -140,8 +140,8 @@
                         $('#trDataPerpus').append('<tr>' +
                             '<td>'+no+'</td>' +
                             '<td style="text-align: left;">'+dt.Perpu+'</td>' +
-                            '<td><a class="btnEditPerpu" data-id="'+d.ID+'"><i class="fa fa-edit"></i></a> | ' +
-                            '<a class="btnDelPerpu" data-id="'+d.ID+'"><i class="fa fa-trash-o"></i></a></td>' +
+                            '<td><a class="btnEditPerpu" data-id="'+dt.IDPerpu+'"><i class="fa fa-edit"></i></a> | ' +
+                            '<a class="btnDelPerpu" data-id="'+dt.IDPerpu+'"><i class="fa fa-trash-o"></i></a></td>' +
                             '</tr>');
 
                         no += 1;

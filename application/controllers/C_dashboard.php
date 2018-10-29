@@ -3,6 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class C_dashboard extends CI_Controller {
 
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->model('m_dashboard');
+    }
+
     public function temp($page){
         $data['page'] = $page;
         $this->load->view('template/template',$data);
@@ -20,9 +26,19 @@ class C_dashboard extends CI_Controller {
 
     public function pengujian()
     {
-//        $data['dataJob'] = $this->db->order_by('ID','ASC')->get('green.jobs')->result_array();
-//        $data['dataCriteria'] = $this->db->order_by('ID','ASC')->get('green.eligibility_criteria')->result_array();
-        $page = $this->load->view('page/pengujian','',true);
+
+        $tahap = $this->input->get('t');
+
+        if(!isset($tahap)){
+            $tahap = 1;
+        }
+
+        // Cek apakah tahap ini sudah diisi atau belum
+//        $dataLog = $this->db->query('SELECT * FROM green.user_step_log usl WHERE usl.IDUser = 1 ')->result_array();
+
+        $data['dataQuestion'] = $this->m_dashboard->__getQuestion($tahap);
+
+        $page = $this->load->view('page/pengujian',$data,true);
         $this->temp($page);
     }
 

@@ -20,6 +20,7 @@
     <link href="<?php echo base_url('assets/animate/animate.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/fontawesome/css/font-awesome.min.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/custom/temp.css'); ?>" rel="stylesheet">
+<!--    <link href="--><?php //echo base_url('assets/checkbox/checkbox.css'); ?><!--" rel="stylesheet">-->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="<?php echo base_url('assets/bootstrap/js/jquery.min.js'); ?>"></script>
