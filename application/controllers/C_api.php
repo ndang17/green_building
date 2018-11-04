@@ -74,6 +74,13 @@ class C_api extends CI_Controller {
             return print_r(json_encode($data));
         }
 
+        else if($data_arr['action']=='readTitleQuestion'){
+            $data = $this->db->select('q_title.ID,q_title.Code,q_title.Title,perpu.Perpu')
+                ->join('green.perpu', 'perpu.IDTitle = q_title.ID')
+                ->order_by('q_title.ID','ASC')->get('green.q_title')->result_array();
+            return print_r(json_encode($data));
+        }
+
         else if($data_arr['action']=='deleteQuestion'){
             $IDQ = $data_arr['IDQ'];
             $this->db->where('ID', $IDQ);

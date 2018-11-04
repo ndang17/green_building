@@ -1,6 +1,9 @@
 <style>
     body{ margin-top:20px; }
 
+    .image-container {
+        background-attachment: fixed;
+    }
 
     .medali {
         padding: 15px;
@@ -149,6 +152,15 @@
                                     </div>
                                     <div class="input-group">
 													<span class="input-group-addon">
+														<i class="fa fa-bars"></i>
+													</span>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Password</label>
+                                            <input type="password" id="formPassword" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+													<span class="input-group-addon">
 														<i class="fa fa-briefcase"></i>
 													</span>
                                         <div class="form-group label-floating">
@@ -251,7 +263,8 @@
 
                                 <div class="col-md-12 text-right">
                                     <hr/>
-                                    <button class="btn btn-fill btn-danger" id="btnMulai">Submit</button>
+                                    <button class="btn btn-fill btn-info" id="btnMelanjutkanTes">Melanjutkan Tes</button> |
+                                    <button class="btn btn-fill btn-danger" id="btnMulai">Kirim</button>
                                 </div>
                             </div>
 
@@ -286,6 +299,9 @@
     </div>
 </div>
 
+<form method="post" id="formPost" class="hide">
+    <input id="formPostEmail" name="email" class="hide">
+</form>
 
 <script>
 
@@ -293,9 +309,6 @@
 
     });
 
-    function loading_button(element){
-        $(element).html();
-    }
 
     $('#formJobID').change(function () {
         console.log('ok');
@@ -314,16 +327,25 @@
         $('#modalMedium .modal-header,#modalMedium .modal-footer').addClass('hide');
         $('#modalMedium .modal-body').html('<div style="text-align:center ;">' +
             '<h3>Mulai tahap pengujia sekarang?</h3>' +
-            '<button class="btn btn-success">Ya, mulai</button> <button class="btn btn-default"  data-dismiss="modal">Tidak, nanti saja</button>' +
+            '<button class="btn btn-success" id="btnYes">Ya, mulai</button> ' +
+            '<button class="btn btn-default"  data-dismiss="modal">Tidak, nanti saja</button>' +
             '</div>');
-        $('#modalMedium').modal('show');
+        $('#modalMedium').modal({backdrop: 'static', keyboard: false});
+    });
+
+    $(document).on('click','#btnYes',function () {
+        saveData();
     });
 
 
     function saveData() {
+
+        $('#btnYes, button[data-dismiss=modal]').prop('disabled',true);
+
         var formName = $('#formName').val();
         var formPosition = $('#formPosition').val();
         var formEmail = $('#formEmail').val();
+        var formPassword = $('#formPassword').val();
         var formJobID = $('#formJobID').val();
         var formJobOther = $('#formJobOther').val();
 
@@ -337,6 +359,7 @@
             Name : formName,
             Position : formPosition,
             Email : formEmail,
+            Password : formPassword,
             JobID : formJobID,
             JobOther : formJobOther,
             ProjectName : formProjectName,
@@ -370,7 +393,14 @@
         var url = base_url_js+'__insertDataUser';
 
         $.post(url,{dataForm:dataForm},function (result) {
+            setTimeout(function () {
 
+                var url2 = base_url_js+'ujian';
+                $('#formPost').attr('action',url2);
+                $('#formPostEmail').val(formEmail);
+                $('#formPost').submit();
+
+            },1000);
         });
 
         console.log(dataForm);
