@@ -52,7 +52,7 @@ class C_dashboard extends CI_Controller {
 
         $email = $this->input->post('email');
 
-        if(isset($email)){
+        if(!isset($email)){
             $data['dataTitle'] = $this->db->order_by('ID','ASC')->limit(1)->get('green.q_title')->result_array()[0];
             $data['detailTitle'] = $this->db->order_by('ID','ASC')->get('green.q_title')->result_array();
             $page = $this->load->view('page/ujian',$data,true);

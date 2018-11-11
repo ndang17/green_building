@@ -75,7 +75,8 @@ class C_api extends CI_Controller {
         }
 
         else if($data_arr['action']=='readTitleQuestion'){
-            $data = $this->db->select('q_title.ID,q_title.Code,q_title.Title,perpu.Perpu')
+            $data = $this->db->select('q_title.ID,q_title.Code,q_title.Title,perpu.Perpu,
+            q_title.Point, q_title.Percentage')
                 ->join('green.perpu', 'perpu.IDTitle = q_title.ID')
                 ->order_by('q_title.ID','ASC')->get('green.q_title')->result_array();
             return print_r(json_encode($data));
@@ -116,6 +117,51 @@ class C_api extends CI_Controller {
 
         }
 
+    }
+
+    public function crudAnswer(){
+        $data_arr = $this->input->post('dataForm');
+
+        if($data_arr['action']=='checkPoint'){
+
+            $MaxPoint = $data_arr['MaxPoint'];
+            $Percentage = $data_arr['Percentage'];
+
+
+            $totalPoint = $data_arr['totalPoint'];
+            $loadTP1 = $data_arr['loadTP1'];
+
+            if($loadTP1==1 || $loadTP1=='1'){
+                $formType1 = $data_arr['formType1'];
+                if(count($formType1)>0){
+                    for($i=0;$i<count($formType1);$i++){
+                        $d = (array) $formType1[$i];
+                        $IDQ = $d['IDQ'];
+                        $TotalChecked = $d['TotalChecked'];
+                        $dataT1 = $this->db->query('SELECT * FROM green.q_type_1_range qr WHERE
+                                            qr.IDQ = "'.$IDQ.'" 
+                                            AND qr.Start <= "'.$TotalChecked.'"
+                                            AND qr.End >= "'.$TotalChecked.'"
+                                            LIMIT 1 ')->result_array();
+
+                        if(count($dataT1)>0){
+                            $totalPoint = (float) $totalPoint + (float) $dataT1[0]['Point'];
+                        }
+                    }
+                }
+            }
+
+
+            $dataPercentage = ($totalPoint>0) ? ($totalPoint/$MaxPoint) * $Percentage : 0;
+
+            $result = array(
+                'TotalPoint' => $totalPoint,
+                'Percentage' => $dataPercentage
+            );
+
+            return print_r(json_encode($result));
+
+        }
     }
 
     public function crudTitle(){

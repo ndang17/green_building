@@ -48,9 +48,32 @@ CREATE TABLE `eligibility_criteria_answ` (
   `EGID` int(11) NOT NULL,
   `Answer` enum('0','1') NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 /*Data for the table `eligibility_criteria_answ` */
+
+insert  into `eligibility_criteria_answ`(`ID`,`UserID`,`EGID`,`Answer`) values 
+(1,1,1,'1'),
+(2,1,2,'0'),
+(3,1,3,'0'),
+(4,1,4,'1'),
+(5,1,5,'0'),
+(6,1,6,'1'),
+(7,1,7,'0'),
+(8,2,1,'1'),
+(9,2,2,'0'),
+(10,2,3,'0'),
+(11,2,4,'0'),
+(12,2,5,'0'),
+(13,2,6,'0'),
+(14,2,7,'0'),
+(15,3,1,'0'),
+(16,3,2,'0'),
+(17,3,3,'0'),
+(18,3,4,'0'),
+(19,3,5,'0'),
+(20,3,6,'0'),
+(21,3,7,'0');
 
 /*Table structure for table `jobs` */
 
@@ -85,7 +108,7 @@ CREATE TABLE `perpu` (
 /*Data for the table `perpu` */
 
 insert  into `perpu`(`ID`,`IDTitle`,`Perpu`) values 
-(2,1,'<p>AREA DASAR HIJAU<span style=\"white-space:pre\">			</span></p><p>TUJUAN<span style=\"white-space:pre\">				</span></p><p>Memelihara atau memperluas kehijauan kota untuk meningkatkan kualitas iklim mikro, mengurangi CO2 dan zat polutan, mencegah erosi tanah, mengurangi beban sistem drainase, menjaga keseimbangan neraca air bersih dan sistem air tanah.<span style=\"white-space:pre\">				</span></p><p>TOLOK UKUR<span style=\"white-space:pre\">				</span></p><p><span style=\"white-space:pre\">		</span>Adanya area lansekap berupa vegetasi (softscape) yang bebas dari struktur bangunan dan struktur sederhana bangunan taman (hardscape) di atas permukaan tanah atau di bawah tanah.&nbsp; <span style=\"white-space:pre\">		</span></p><p><span style=\"white-space:pre\">		</span>a. Untuk konstruksi baru, luas areanya adalah minimal 10% dari luas total lahan.<span style=\"white-space:pre\">		</span></p><p><span style=\"white-space:pre\">		</span>b. Untuk renovasi utama (major renovation), luas areanya adalah minimal 50% dari ruang terbuka yang bebas basement dalam tapak <span style=\"white-space:pre\">		</span></p><p><span style=\"white-space:pre\">				</span></p><p><span style=\"white-space:pre\">		</span>Area ini memiliki vegetasi mengikuti Permendagri No 1 tahun 2007 Pasal 13 (2a) dengan komposisi 50% lahan tertutupi luasan pohon ukuran kecil, ukuran sedang, ukuran besar, perdu setengah pohon, perdu, semak dalam ukuran dewasa, dengan jenis tanaman mempertimbangkan Peraturan Menteri PU No. 5/PRT/M/2008 mengenai Ruang Terbuka Hijau (RTH) Pasal&nbsp; 2.3.1&nbsp; tentang Kriteria Vegetasi untuk Pekarangan<span style=\"white-space:pre\">		</span></p><div><br></div>'),
+(2,1,'<p style=\"text-align: center; \"><b><u style=\"background-color: rgb(255, 255, 0);\">AREA DASAR HIJAU</u></b></p><p style=\"text-align: center; \"><b>TUJUAN</b></p><p style=\"text-align: center; \">Memelihara atau memperluas kehijauan kota untuk meningkatkan kualitas iklim mikro, mengurangi CO2 dan zat polutan, mencegah erosi tanah, mengurangi beban sistem drainase, menjaga keseimbangan neraca air bersih dan sistem air tanah.<span style=\"white-space: pre;\">				</span></p><p style=\"text-align: center;\"><b>TOLOK UKUR</b></p><p style=\"text-align: center;\"><span style=\"white-space: pre;\">	</span>Adanya area lansekap berupa vegetasi (softscape) yang bebas dari struktur bangunan dan struktur sederhana bangunan taman (hardscape) di atas permukaan tanah atau di bawah tanah.&nbsp; <span style=\"white-space: pre;\">		</span></p><p style=\"text-align: center;\"><span style=\"white-space:pre\">		</span>a. Untuk konstruksi baru, luas areanya adalah minimal 10% dari luas total lahan.<span style=\"white-space:pre\">		</span></p><p style=\"text-align: center;\"><span style=\"white-space:pre\">		</span>b. Untuk renovasi utama (major renovation), luas areanya adalah minimal 50% dari ruang terbuka yang bebas basement dalam tapak <span style=\"white-space:pre\">		</span></p><p style=\"text-align: center;\"><span style=\"white-space:pre\">				</span></p><p style=\"text-align: center;\"><span style=\"white-space:pre\">		</span>Area ini memiliki vegetasi mengikuti Permendagri No 1 tahun 2007 Pasal 13 (2a) dengan komposisi 50% lahan tertutupi luasan pohon ukuran kecil, ukuran sedang, ukuran besar, perdu setengah pohon, perdu, semak dalam ukuran dewasa, dengan jenis tanaman mempertimbangkan Peraturan Menteri PU No. 5/PRT/M/2008 mengenai Ruang Terbuka Hijau (RTH) Pasal&nbsp; 2.3.1&nbsp; tentang Kriteria Vegetasi untuk Pekarangan<span style=\"white-space:pre\">		</span></p><div style=\"text-align: center;\"><br></div>'),
 (3,2,'<p>EFISIENSI DAN KONSERVASI ENERGI</p><p>a. Pemasangan Sub-meter</p><p>TUJUAN</p><p>Memantau penggunaan energi sehingga dapat menjadi dasar penerapan&nbsp;</p><p>TOLOK UKUR</p><p>Memasang&nbsp; kWh meter untuk mengukur konsumsi listrik pada setiap&nbsp; kelompok beban dan sistem peralatan, yang meliputi:</p><p>o Sistem tata udara</p><p>o Sistem tata cahaya dan kotak kontak</p><p>o Sistem beban lainnya&nbsp;</p><p><br></p><p>b.&nbsp;Perhitungan OTTV&nbsp;&nbsp;</p><p>TUJUAN</p><p>Mendorong sosialisasi arti selubung bangunan gedung yang baik untuk penghematan energi.&nbsp;&nbsp;</p><p>TOLOK UKUR</p><p>Menghitung dengan cara perhitungan OTTV berdasarkan SNI 03-6389- 2011 atau SNI edisi terbaru tentang Konservasi Energi selubung bangunan pada Bangunan Gedung.&nbsp;</p>'),
 (4,3,'<p>KONSERVASI AIR</p><p>a. Meteran Air</p><p>TUJUAN</p><p>Memantau penggunaan air sehingga dapat menjadi dasar penerapan manajemen air yang lebih baik. manajemen energi yang lebih baik.&nbsp;</p><p>TOLOK UKUR</p><p>Pemasangan alat meteran air (volume meter) yang ditempatkan di lokasi- lokasi tertentu pada sistem distribusi air, sebagai berikut:</p><p>o Satu volume meter di setiap sistem keluaran sumber air bersih seperti sumber PDAM atau air tanah.&nbsp;</p><p>o Satu volume meter untuk memonitor keluaran sistem air daur ulang.</p><p>o Satu volume meter dipasang untuk mengukur tambahan keluaran air bersih apabila dari sistem daur ulang tidak mencukupi.&nbsp;</p><p><br></p><p>b.&nbsp;Perhitungan Penggunaan Air&nbsp;</p><p>TUJUAN</p><p>Memahami perhitungan menggunakan worksheet perhitungan air dari GBC Indonesia untuk mengetahui simulasi penggunaan air pada saat tahap operasi gedung penghematan energi.</p><p>TOLOK UKUR</p><p>Mengis ceklist yang telah disediakan.<br></p>'),
 (5,4,'<p>SUMBER DAN SIKLUS MATERIAL</p><p>Refigeran fundamental&nbsp;</p><p>TUJUAN</p><p>Mencegah pemakaian bahan dengan potensi merusak ozon yang tinggi manajemen air yang lebih baik manajemen energi yang lebih baik.&nbsp;</p><p>TOLOK UKUR</p><p>Pemasangan alat meteran air (volume meter) yang ditempatkan di lokasi-Tidak menggunakan chloro fluoro-carbon (CFC) sebagai refrigeran dan halon sebagai bahan pemadam kebakaran.</p>'),
@@ -389,6 +412,7 @@ CREATE TABLE `user` (
   `Name` varchar(100) DEFAULT NULL,
   `Position` varchar(200) DEFAULT NULL,
   `Email` varchar(200) DEFAULT NULL,
+  `Password` varchar(255) DEFAULT NULL,
   `Hp` varchar(15) DEFAULT NULL,
   `JobID` int(11) DEFAULT NULL,
   `JobOther` varchar(100) DEFAULT NULL,
@@ -398,9 +422,14 @@ CREATE TABLE `user` (
   `BuildingArea` float DEFAULT NULL COMMENT 'luas bangunan',
   `CreateAt` datetime NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user` */
+
+insert  into `user`(`ID`,`Name`,`Position`,`Email`,`Password`,`Hp`,`JobID`,`JobOther`,`ProjectName`,`Location`,`LandArea`,`BuildingArea`,`CreateAt`) values 
+(1,'Nandang','IT','n@m','202cb962ac59075b964b07152d234b70',NULL,1,'','APL','Grogol',100,200,'2018-11-04 09:48:28'),
+(2,'Nandang','IT','a@m','202cb962ac59075b964b07152d234b70',NULL,1,'','APL','Grogol',200,300,'2018-11-04 09:57:56'),
+(3,'','','','d41d8cd98f00b204e9800998ecf8427e',NULL,0,'','','',0,0,'2018-11-08 23:11:41');
 
 /*Table structure for table `user_step_log` */
 

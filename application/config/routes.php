@@ -31,6 +31,7 @@ $route['admin/statistik'] = 'c_admin/statistik';
 // ==== API ===
 $route['api/__getTitle'] = 'c_api/getTitle';
 $route['api/crudQuestion'] = 'c_api/crudQuestion';
+$route['api/crudAnswer'] = 'c_api/crudAnswer';
 $route['api/crudTitle'] = 'c_api/crudTitle';
 $route['api/crudLabel'] = 'c_api/crudLabel';
 $route['api/crudPurpose'] = 'c_api/crudPurpose';

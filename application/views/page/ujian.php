@@ -27,7 +27,7 @@
 
         border-top: none;
         border-bottom: none;
-        padding-top: 20px;
+        /*padding-top: 20px;*/
         padding-bottom: 20px;
     }
 
@@ -99,6 +99,9 @@
     <div id="divLoadNav"></div>
     <input id="formIDTitle" value="<?php echo $dataTitle['ID']; ?>" class="hide" readonly>
     <input id="formTotalTitle" value="0" class="hide" readonly>
+    <input id="formIDQ" value="0" class="hide" readonly>
+    <input id="formMaxPoint" value="0" class="hide" readonly>
+    <input id="formPercentage" value="0" class="hide" readonly>
 
     <div class="container" style="margin-bottom: 20px;">
         <div class="row">
@@ -107,6 +110,8 @@
                 <div id="divLoadQuestion"></div>
                 <div class="row">
                     <div class="col-md-12" style="text-align: right;">
+                        <span id="viewTotalPoint"></span>
+                        <button class="btn btn-default" id="btnCekNilai">Cek Nilai</button>
                         <button class="btn btn-success" id="btnNextQuestion" disabled>Simpan dan lanjutkan <i class="fa fa-angle-double-right fa-2x pull-right" style="margin-left: 15px;"></i></button>
                     </div>
                 </div>
@@ -114,13 +119,16 @@
 
         </div>
 
-
     </div>
 </div>
 
 
 <script>
     $(document).ready(function () {
+
+        window.dataType1 = [];
+        window.dataType2 = [];
+        window.dataType3 = [];
 
         var firsLoad = setInterval(function () {
             var formIDTitle = $('#formIDTitle').val();
@@ -150,9 +158,12 @@
         var formIDTitle = $('#formIDTitle').val();
         var formTotalTitle = $('#formTotalTitle').val();
 
+        $('#viewTotalPoint').html('');
+
         if(parseInt(formIDTitle)==parseInt(formTotalTitle)){
             $('#btnNextQuestion').html('Selesai');
-        } else {
+        }
+        else {
 
             $('#btnNextQuestion').prop('disabled',true);
 
@@ -171,6 +182,76 @@
         },1000);
     });
 
+    $(document).on('click','#btnCekNilai',function () {
+
+        var totalPoint = 0;
+
+        var formType1 = [];
+
+        if(dataType1.length>0){
+            for(var i=0;i<dataType1.length;i++){
+                var IDQ = dataType1[i];
+                var d = $('input[type=checkbox][name=q_type1'+IDQ+']:checked').length;
+
+                var TotalChecked = parseFloat(d);
+                if(TotalChecked>0){
+
+                    var dataForm = {
+                        IDQ : IDQ,
+                        TotalChecked : TotalChecked
+                    };
+
+                    formType1.push(dataForm);
+                }
+            }
+        }
+
+
+        if(dataType2.length>0){
+            for(var i2=0;i2<dataType2.length;i2++){
+                var d = $('input[type=radio][name=q_type2'+dataType2[i2]+']:checked').val();
+                // console.log(d);
+                totalPoint = totalPoint + parseFloat(d);
+            }
+        }
+
+        if(dataType3.length>0){
+            for(var i3=0;i3<dataType3.length;i3++){
+                var ID = dataType3[i3];
+                if($('input[type=checkbox][name=q_type3'+ID+']').is(':checked')){
+                    var d = $('input[type=checkbox][name=q_type3'+ID+']:checked').val();
+                    // console.log(d);
+                    totalPoint = totalPoint + parseFloat(d);
+                }
+            }
+        }
+
+
+        var MaxPoint = parseFloat($('#formMaxPoint').val());
+        var Percentage = parseFloat($('#formPercentage').val());
+
+
+        var loadTP1 = (formType1.length>0) ? 1 : 0 ;
+
+        // Post untuk cek nilai
+        var dataForm = {
+            action : 'checkPoint',
+            IDQ : $('#formIDQ').val(),
+            formType1 : formType1,
+            loadTP1 : loadTP1,
+            MaxPoint : MaxPoint,
+            Percentage : Percentage,
+            totalPoint : totalPoint
+
+        };
+
+        var url = base_url_js+'api/crudAnswer';
+
+        $.post(url,{dataForm : dataForm},function (jsonResult) {
+            $('#viewTotalPoint').html('Total Poin : '+jsonResult.TotalPoint+' - '+jsonResult.Percentage.toFixed(2)+' % | ');
+        });
+
+    });
 
     function loadMenuBar() {
 
@@ -186,7 +267,6 @@
             $.post(url,{dataForm : data},function (jsonResult) {
 
                 $('#divLoadNav').html('');
-                console.log(jsonResult);
 
                 $('#formTotalTitle').val(jsonResult.length);
 
@@ -213,6 +293,9 @@
                             $('#globalModalLarge .modal-body').html('<div style="text-align: center;">'+d.Perpu+'<hr/><button class="btn btn-default" data-dismiss="modal">Tutup</button></div>');
                             $('#globalModalLarge').modal('show');
                             // $('#divPerpus').html(d.Perpu);
+                            $('#formMaxPoint').val(d.Point);
+                            $('#formIDQ').val(d.ID);
+                            $('#formPercentage').val(d.Percentage);
                         }
                     }
 
@@ -240,7 +323,10 @@
 
             $('#divLoadQuestion').html('');
             $.post(url,{dataForm : data},function (jsonResult){
-                console.log(jsonResult);
+                // console.log(jsonResult);
+                dataType1 = [];
+                dataType2 = [];
+                dataType3 = [];
                 if(jsonResult.length>0){
 
                     for(var i=0;i<jsonResult.length;i++){
@@ -272,25 +358,43 @@
                                         '                                <div class="number">'+no+'</div>' +
                                         '                            </div>' +
                                         '                            <div class="col-xs-11">' +
-                                        '                                <div class="question">'+d_s.Question+'</div>' +
-                                        '                                <div class="q-type1" id="loadTypeQ1_'+d_s.ID+'">' +
-                                        '                                </div>' +
+                                        '                               <div class="row">' +
+                                        '                                   <div class="col-md-12">' +
+                                        '                                       <div class="question">'+d_s.Question+'</div>' +
+                                        '                                   </div>' +
+                                        '                               </div>' +
+
+                                        '                               <div class="row">' +
+                                        '                                   <div class="col-md-6" style="border-right:1px solid #ccc;">' +
+                                        '                                       <div class="q-type1" id="loadTypeQ1_1'+d_s.ID+'"></div>' +
+                                        '                                   </div>' +
+                                        '                                   <div class="col-md-6">' +
+                                        '                                       <div class="q-type1" id="loadTypeQ1_2'+d_s.ID+'"></div>' +
+                                        '                                   </div>' +
+                                        '                               </div>' +
+
                                         '                            </div>' +
                                         '                        </div>');
-
                                     // Load Jawaban
                                     if(d_s.dataLabel.length>0){
+
+                                        // Dibagi dua
+                                        var divq = Math.ceil(d_s.dataLabel.length/2);
                                         for(var q=0;q<d_s.dataLabel.length;q++){
                                             var d_s_q = d_s.dataLabel[q];
-                                            $('#loadTypeQ1_'+d_s.ID).append('<div class="checkbox">' +
+
+                                            var idQ = (q<divq) ? '#loadTypeQ1_1'+d_s.ID : '#loadTypeQ1_2'+d_s.ID ;
+
+                                            $(idQ).append('<div class="checkbox">' +
                                                 '                                 <label style="font-size: 1em">' +
-                                                '                                     <input type="checkbox" value="">' +
+                                                '                                     <input type="checkbox" name="q_type1'+d_s.ID+'" value="">' +
                                                 '                                     <span class="cr"><i class="cr-icon fa fa-check"></i></span>'+d_s_q.Label+'' +
                                                 '                                 </label>' +
                                                 '                             </div>');
                                         }
                                     }
 
+                                    dataType1.push(d_s.ID);
                                 }
                                 else if(d_s.Type==2 || d_s.Type=='2'){
                                     // Type 2
@@ -300,18 +404,18 @@
                                         '                            </div>' +
                                         '                            <div class="col-xs-11">' +
                                         '                                <div class="question">'+d_s.Question+'</div>' +
-                                        '                                <div class="q-type2" id="loadTypeQ2_'+d_s.ID+'">' +
-                                        '                                </div>' +
+                                        '                                <div class="q-type2" id="loadTypeQ2_'+d_s.ID+'" style="margin-top: 20px;"></div>' +
                                         '                            </div>' +
                                         '                        </div>');
 
+                                    dataType2.push(d_s.ID);
                                     // Load Jawaban
                                     if(d_s.dataLabel.length>0){
                                         for(var q=0;q<d_s.dataLabel.length;q++){
                                             var d_s_q = d_s.dataLabel[q];
                                             $('#loadTypeQ2_'+d_s.ID).append('<div class="radio">' +
                                                 '                               <label>' +
-                                                '                                   <input type="radio" name="o1" value="">' +
+                                                '                                   <input type="radio" name="q_type2'+d_s.ID+'" value="'+d_s_q.Point+'">' +
                                                 '                                   <span class="cr"><i class="cr-icon glyphicon glyphicon-ok-sign"></i></span> '+d_s_q.Label+' ' +
                                                 '                               </label>' +
                                                 '                           </div>');
@@ -319,7 +423,7 @@
                                             if(q == (d_s.dataLabel.length - 1)){
                                                 $('#loadTypeQ2_'+d_s.ID).append('<div class="radio">' +
                                                     '                               <label>' +
-                                                    '                                   <input type="radio" name="o1" value="">' +
+                                                    '                                   <input type="radio" name="q_type2'+d_s.ID+'" value="0" checked>' +
                                                     '                                   <span class="cr"><i class="cr-icon glyphicon glyphicon-ok-sign"></i></span> Tidak memilih' +
                                                     '                               </label>' +
                                                     '                           </div>');
@@ -341,12 +445,13 @@
                                         '                            <div class="col-xs-1" style="text-align: center;">' +
                                         '<div class="checkbox">' +
                                         '    <label style="font-size: 2em;padding-left:0px">' +
-                                        '        <input type="checkbox" value="" checked="">' +
+                                        '        <input type="checkbox" name="q_type3'+d_s.ID+'" value="'+d_s.Point+'">' +
                                         '        <span class="cr"><i class="cr-icon fa fa-check"></i></span>' +
                                         '    </label>' +
                                         '</div>' +
                                         '</div>' +
-                                        '                        </div>');
+                                        '</div>');
+                                    dataType3.push(d_s.ID);
                                 }
 
                                 no += 1;
