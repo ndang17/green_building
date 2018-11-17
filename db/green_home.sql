@@ -48,7 +48,7 @@ CREATE TABLE `eligibility_criteria_answ` (
   `EGID` int(11) NOT NULL,
   `Answer` enum('0','1') NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=latin1;
 
 /*Data for the table `eligibility_criteria_answ` */
 
@@ -73,7 +73,35 @@ insert  into `eligibility_criteria_answ`(`ID`,`UserID`,`EGID`,`Answer`) values
 (18,3,4,'0'),
 (19,3,5,'0'),
 (20,3,6,'0'),
-(21,3,7,'0');
+(21,3,7,'0'),
+(22,4,1,'0'),
+(23,4,2,'0'),
+(24,4,3,'0'),
+(25,4,4,'0'),
+(26,4,5,'0'),
+(27,4,6,'0'),
+(28,4,7,'0'),
+(29,5,1,'0'),
+(30,5,2,'0'),
+(31,5,3,'0'),
+(32,5,4,'0'),
+(33,5,5,'0'),
+(34,5,6,'0'),
+(35,5,7,'0'),
+(36,6,1,'0'),
+(37,6,2,'0'),
+(38,6,3,'0'),
+(39,6,4,'0'),
+(40,6,5,'0'),
+(41,6,6,'0'),
+(42,6,7,'0'),
+(43,7,1,'1'),
+(44,7,2,'1'),
+(45,7,3,'1'),
+(46,7,4,'1'),
+(47,7,5,'0'),
+(48,7,6,'1'),
+(49,7,7,'0');
 
 /*Table structure for table `jobs` */
 
@@ -432,14 +460,18 @@ CREATE TABLE `user` (
   `BuildingArea` float DEFAULT NULL COMMENT 'luas bangunan',
   `CreateAt` datetime NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user` */
 
 insert  into `user`(`ID`,`Name`,`Position`,`Email`,`Password`,`Hp`,`JobID`,`JobOther`,`ProjectName`,`Location`,`LandArea`,`BuildingArea`,`CreateAt`) values 
 (1,'','','','d41d8cd98f00b204e9800998ecf8427e',NULL,0,'','','',0,0,'2018-11-09 13:37:54'),
 (2,'','','','d41d8cd98f00b204e9800998ecf8427e',NULL,0,'','','',0,0,'2018-11-10 20:02:28'),
-(3,'','','','d41d8cd98f00b204e9800998ecf8427e',NULL,0,'','','',0,0,'2018-11-11 09:21:00');
+(3,'','','','d41d8cd98f00b204e9800998ecf8427e',NULL,0,'','','',0,0,'2018-11-11 09:21:00'),
+(4,'','','','d41d8cd98f00b204e9800998ecf8427e',NULL,0,'','','',0,0,'2018-11-17 20:27:06'),
+(5,'','','','d41d8cd98f00b204e9800998ecf8427e',NULL,0,'','','',0,0,'2018-11-17 20:27:50'),
+(6,'','','nndg.m92@gmail.com','d41d8cd98f00b204e9800998ecf8427e',NULL,0,'','','',0,0,'2018-11-17 20:29:10'),
+(7,'Nandang Mulyadi','IT','it@po.c','d41d8cd98f00b204e9800998ecf8427e',NULL,0,'Magang','Neo Soho City','ALP Tower - Jalan tanjung duren Jakarta Barat',4000,1000,'2018-11-17 22:51:24');
 
 /*Table structure for table `user_step_log` */
 
@@ -448,12 +480,22 @@ DROP TABLE IF EXISTS `user_step_log`;
 CREATE TABLE `user_step_log` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `IDUser` int(11) NOT NULL,
-  `Step` int(11) DEFAULT NULL COMMENT '0 = tahap input data projek, 1 = ujicoba tahap 1, 2 = test thp 2, 3 = test thp 3 sampai dengan 6',
-  `UpdateAr` datetime DEFAULT NULL,
+  `IDTitle` int(11) DEFAULT NULL COMMENT '0 = tahap input data projek, 1 = ujicoba tahap 1, 2 = test thp 2, 3 = test thp 3 sampai dengan 6',
+  `TotalPoint` float(5,2) DEFAULT NULL,
+  `Percentage` float(5,2) DEFAULT NULL,
+  `UpdateAt` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user_step_log` */
+
+insert  into `user_step_log`(`ID`,`IDUser`,`IDTitle`,`TotalPoint`,`Percentage`,`UpdateAt`) values 
+(1,7,1,4.75,4.69,'2018-11-17 23:20:59'),
+(2,7,2,18.00,17.79,'2018-11-17 23:21:20'),
+(3,7,3,8.00,7.92,'2018-11-17 23:21:43'),
+(4,7,4,10.50,10.43,'2018-11-17 23:22:01'),
+(5,7,5,6.00,5.94,'2018-11-17 23:22:17'),
+(6,7,6,6.00,5.95,'2018-11-17 23:22:34');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
