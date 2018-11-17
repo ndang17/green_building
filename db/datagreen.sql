@@ -1,6 +1,6 @@
 /*
-SQLyog Community v13.0.1 (64 bit)
-MySQL - 10.1.26-MariaDB : Database - apgt1743_green
+SQLyog Community v12.4.3 (64 bit)
+MySQL - 10.1.36-MariaDB : Database - green
 *********************************************************************
 */
 
@@ -12,9 +12,9 @@ MySQL - 10.1.26-MariaDB : Database - apgt1743_green
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`apgt1743_green` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`green` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-USE `apgt1743_green`;
+USE `green`;
 
 /*Table structure for table `eligibility_criteria` */
 
@@ -48,7 +48,7 @@ CREATE TABLE `eligibility_criteria_answ` (
   `EGID` int(11) NOT NULL,
   `Answer` enum('0','1') NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `eligibility_criteria_answ` */
 
@@ -59,21 +59,7 @@ insert  into `eligibility_criteria_answ`(`ID`,`UserID`,`EGID`,`Answer`) values
 (4,1,4,'0'),
 (5,1,5,'0'),
 (6,1,6,'0'),
-(7,1,7,'0'),
-(8,2,1,'0'),
-(9,2,2,'0'),
-(10,2,3,'0'),
-(11,2,4,'0'),
-(12,2,5,'0'),
-(13,2,6,'0'),
-(14,2,7,'0'),
-(15,3,1,'0'),
-(16,3,2,'0'),
-(17,3,3,'0'),
-(18,3,4,'0'),
-(19,3,5,'0'),
-(20,3,6,'0'),
-(21,3,7,'0');
+(7,1,7,'0');
 
 /*Table structure for table `jobs` */
 
@@ -160,14 +146,14 @@ insert  into `q_label`(`ID`,`IDTitle`,`Code`,`Label`,`Purpose`,`TotalPoint`) val
 (29,5,'IHC5','Kenyamanan Visual','Mencegah terjadinya gangguan visual akibat tingkat pencahayaan yang tidak sesuai dengan daya akomodasi mata.',1),
 (30,5,'IHC6','Kenyamanan Termal','Menjaga kenyamanan suhu dan kelembaban udara ruangan yang dikondisikan stabil untuk meningkatkan produktivitas pengguna gedung.',1),
 (31,5,'IHC7','Tingkat Kebisingan','Menjaga tingkat kebisingan di dalam ruangan pada tingkat yang optimal.',1),
-(32,6,'BEM1','GP Sebagai Anggota Tim Proyek','Mengarahkan langkah-langkah desain suatu apgt1743_green building sejak tahap awal sehingga memudahkan tercapainya suatu desain yang memenuhi rating.',1),
+(32,6,'BEM1','GP Sebagai Anggota Tim Proyek','Mengarahkan langkah-langkah desain suatu green building sejak tahap awal sehingga memudahkan tercapainya suatu desain yang memenuhi rating.',1),
 (33,6,'BEM2','Polusi dari Aktivitas Konstruksi','Mendorong pengurangan sampah yang dibawa ke tempat pembuangan akhir (TPA) dan polusi dari proses konstruksi. Memiliki rencana manajemen sampah konstruksi yang terdiri atas:',2),
 (34,6,'BEM3','Pengelolaan Sampah Tingkat Lanjut','Mendorong manajemen kebersihan dan sampah secara terpadu sehingga mengurangi beban TPA.',2),
 (35,6,'BEM4','Sistem Komisioning yang Baik dan Benar','Melaksanakan komisioning yang baik dan benar pada bangunan agar kinerja yang dihasilkan sesuai dengan perencanaan awal.',3),
-(36,6,'BEM5','Penyerahan Data apgt1743_green Building','Melengkapi database implementasi apgt1743_green building di Indonesia untuk mempertajam standar-standar dan bahan penelitian.',2),
-(37,6,'BEM6','Kesepakatan Dalam Melakukan Aktivitas Fit Out','Mengimplementasikan prinsip apgt1743_green building saat fit out gedung.',1),
+(36,6,'BEM5','Penyerahan Data Green Building','Melengkapi database implementasi green building di Indonesia untuk mempertajam standar-standar dan bahan penelitian.',2),
+(37,6,'BEM6','Kesepakatan Dalam Melakukan Aktivitas Fit Out','Mengimplementasikan prinsip green building saat fit out gedung.',1),
 (38,6,'BEM7','Survei Pengguna Gedung','Mengukur kenyamanan pengguna gedung melalui survei yang baku terhadap pengaruh desain dan sistem pengoperasian gedung.',2),
-(39,1,'ADS1','Pemilihan Tampak','Menghindari pembangunan di area apgt1743_greenfields dan menghindari pembukaan',2),
+(39,1,'ADS1','Pemilihan Tampak','Menghindari pembangunan di area greenfields dan menghindari pembukaan',2),
 (40,1,'ADS2','Aksebilitas Komunitas','Mendorong pembangunan di tempat yang telah memiliki jaringan konektivitas  dan meningkatkan pencapaian penggunaan gedung sehingga mempermudah masyarakat dalam menjalankan kegiatan sehari-hari dan menghindari penggunaan kendaraan bermotor.',2),
 (41,1,'ADS4','Fasilitas Pengguna Sepeda','Mendorong penggunaan sepeda bagi pengguna gedung dengan memberikan  fasilitas yang memadai sehingga dapat mengurangi penggunaan kendaraan bermotor.',2);
 
@@ -219,15 +205,15 @@ insert  into `q_question`(`ID`,`IDTitle`,`IDLabel`,`Order`,`Question`,`Type`,`Po
 (46,5,29,'1','Menggunakan lampu dengan iluminansi (tingkat pencahayaan) ruangan sesuai dengan SNI 03-6197-2011 tentang Konservasi Energi pada Sistem Pencahayaan.','3',1),
 (47,5,30,'','Menetapkan perencanaan kondisi termal ruangan secara umum pada suhu 250 C dan kelembaban relatif 60%','3',1),
 (48,5,31,'1','Tingkat kebisingan pada 90% dari nett lettable area (NLA) tidak lebih dari atau sesuai dengan SNI 03-6386-2000 tentang Spesifikasi Tingkat Bunyi dan Waktu Dengung dalam Bangunan Gedung dan Perumahan (kriteria desain yang direkomendasikan).','3',1),
-(50,6,32,'1','Melibatkan minimal seorang tenaga ahli yang sudah bersertifikat apgt1743_greenSHIP Professional (GP), yang bertugas untuk memandu proyek hingga mendapatkan sertifikat apgt1743_greenSHIP.','3',1),
+(50,6,32,'1','Melibatkan minimal seorang tenaga ahli yang sudah bersertifikat GREENSHIP Professional (GP), yang bertugas untuk memandu proyek hingga mendapatkan sertifikat GREENSHIP.','3',1),
 (51,6,33,'1','Limbah padat, dengan menyediakan area pengumpulan, pemisahan, dan sistem pencatatan. Pencatatan dibedakan berdasarkan limbah padat yang dibuang ke TPA, digunakan kembali, dan didaur ulang oleh pihak ketiga.','3',1),
 (52,6,33,'2','Limbah cair, dengan menjaga kualitas seluruh buangan air yang timbul dari aktivitas konstruksi agar tidak mencemari drainase kota','3',1),
 (53,6,34,'1','Mengolah limbah organik gedung yang dilakukan secara mandiri maupun bekerjasama dengan pihak ketiga sehingga menambah nilai manfaat dan dapat mengurangi dampak lingkungan.','3',1),
 (54,6,34,'2','Mengolah limbah anorganik gedung yang dilakukan secara mandiri maupun bekerjasama dengan pihak ketiga sehingga menambah nilai manfaat dan dapat mengurangi dampak lingkungan.','3',1),
 (55,6,35,'1','Melakukan prosedur testing- commissioning sesuai dengan petunjuk GBC Indonesia, termasuk pelatihan terkait untuk optimalisasi kesesuaian fungsi dan kinerja peralatan/sistem dengan perencanaan dan acuannya.','3',2),
 (56,6,35,'2','Memastikan seluruh measuring adjusting instrument telah terpasang pada saat konstruksi dan memperhatikan kesesuaian antara desain dan spesifikasi teknis terkait komponen proper commissioning.','3',1),
-(57,6,36,'1','Menyerahkan data implementasi apgt1743_green building.','3',1),
-(58,6,36,'2','Memberi pernyataan bahwa pemilik gedung akan menyerahkan data implementasi apgt1743_green building dari bangunannya dalam waktu 12 bulan setelah tanggal sertifikasi  dan suatu pusat data energi Indonesia yang akan ditentukan kemudian.','3',1),
+(57,6,36,'1','Menyerahkan data implementasi green building.','3',1),
+(58,6,36,'2','Memberi pernyataan bahwa pemilik gedung akan menyerahkan data implementasi green building dari bangunannya dalam waktu 12 bulan setelah tanggal sertifikasi  dan suatu pusat data energi Indonesia yang akan ditentukan kemudian.','3',1),
 (59,6,37,'1','Memiliki surat perjanjian dengan penyewa gedung (tenant) untuk gedung yang disewakan atau POS untuk gedung yang digunakan sendiri, yang terdiri atas:\na. Penggunaan kayu yang bersertifikat untuk material fit-out\nb. Pelaksanaan pelatihan yang akan dilakukan oleh manajemen gedung\nc. Pelaksanaan manajemen indoor air quality (IAQ) setelah konstruksi fit-out. Implementasi dalam bentuk Perjanjian Sewa (lease agreement) atau POS.','3',1),
 (60,6,38,'1','Memberi pernyataan bahwa pemilik gedung akan mengadakan survei suhu dan kelembaban paling lambat 12 bulan setelah tanggal sertifikasi dan menyerahkan laporan hasil survei paling lambat 15 bulan setelah tanggal sertifikasi kepada GBC Indonesia.\nCatatan: Apabila hasilnya lebih dari 20% responden menyatakan ketidaknyamanannya, maka pemilik gedung setuju untuk melakukan perbaikan selambat-lambatnya 6 bulan setelah pelaporan hasil survei.','3',2),
 (62,1,3,'2','Menyediakan fasilitas jalur pedestrian di dalam area gedung untuk menuju ke stasiun transportasi umum terdekat yang aman dan nyaman  dengan mempertimbangkan Peraturan Menteri Pekerjaan Umum 30/PRT/M/2006 mengenai Pedoman Teknis Fasilitas dan Aksesibilitas pada Bangunan Gedung dan Lingkungan Lampiran 2B.','3',1),
@@ -242,7 +228,7 @@ insert  into `q_question`(`ID`,`IDTitle`,`IDLabel`,`Order`,`Question`,`Type`,`Po
 (78,1,3,'1','1. Adanya halte atau stasiun  transportasi umum dalam jangkauan 300 m (walking distance) dari gerbang lokasi bangunan dengan tidak memperhitungkan panjang jembatan penyeberangan dan ramp. \n2. Menyediakan shuttle bus untuk pengguna tetap gedung dengan jumlah unit minimum untuk 10% pengguna tetap gedung','3',1),
 (79,1,41,'1','Adanya tempat parkir sepeda yang aman sebanyak satu unit parkir per 20 pengguna gedung hingga maksimal 100 unit parkir sepeda.','3',1),
 (80,1,41,'2','Apabila tolok ukur 1 diatas terpenuhi, perlu tersedianya shower sebanyak 1 unit untuk setiap 10 parkir sepeda.','3',1),
-(81,1,6,'1','Menggunakan berbagai material untuk menghindari efek heat island pada area atap gedung sehingga nilai albedo (daya refleksi panas matahari) minimum 0,3 sesuai dengan perhitungan / Menggunakan apgt1743_green roof sebesar 50% dari luas atap yang tidak digunakan untuk mechanical electrical (ME), dihitung dari luas tajuk','3',1),
+(81,1,6,'1','Menggunakan berbagai material untuk menghindari efek heat island pada area atap gedung sehingga nilai albedo (daya refleksi panas matahari) minimum 0,3 sesuai dengan perhitungan / Menggunakan green roof sebesar 50% dari luas atap yang tidak digunakan untuk mechanical electrical (ME), dihitung dari luas tajuk','3',1),
 (82,1,6,'2','Menggunakan berbagai material untuk menghindari efek heat island pada area perkerasan non-atap sehingga nilai albedo (daya refleksi panas matahari) minimum 0,3 sesuai dengan perhitungan.','2',NULL),
 (84,1,7,'1','Pengurangan beban volume limpasan air hujan ke jaringan drainase kota dari lokasi bangunan hingga 50%, yang dihitung menggunakan nilai intensitas curah hujan sebesar 50 mm/hari. atau Pengurangan beban volume limpasan air hujan ke jaringan drainase kota 3 dari lokasi bangunan hingga 85%, yang dihitung menggunakan nilai 2 intensitas curah hujan sebesar 50 mm/hari.','3',1),
 (85,2,8,'','Nilai OTTV sesuai dengan SNI 03-6389-2011 atau SNI edisi terbaru tentang Konservasi Energi Selubung Bangunan pada Bangunan Gedung.Apabila tolok ukur 1 dipenuhi, penurunan per 2.5% .','2',NULL),
@@ -262,20 +248,18 @@ CREATE TABLE `q_title` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Code` varchar(100) DEFAULT NULL,
   `Title` varchar(200) DEFAULT NULL,
-  `Point` float DEFAULT NULL,
-  `Percentage` float DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `q_title` */
 
-insert  into `q_title`(`ID`,`Code`,`Title`,`Point`,`Percentage`) values 
-(1,'ADS','AREA DASAR HIJAU',17,16.8),
-(2,'EEC','EFISIENSI DAN KONSERVASI ENERGI',26,25.7),
-(3,'WAC','KONSERVASI AIR',21,20.8),
-(4,'MRC','SUMBER DAN SIKLUS MATERIAL',14,13.9),
-(5,'IHC','KESEHATAN DAN KENYAMANAN DALAM RUANG',10,9.9),
-(6,'BEM','MANAJEMEN LINGKUNGAN BANGUNAN',13,12.9);
+insert  into `q_title`(`ID`,`Code`,`Title`) values 
+(1,'ADS','AREA DASAR HIJAU'),
+(2,'EEC','EFISIENSI DAN KONSERVASI ENERGI'),
+(3,'WAC','KONSERVASI AIR'),
+(4,'MRC','SUMBER DAN SIKLUS MATERIAL'),
+(5,'IHC','KESEHATAN DAN KENYAMANAN DALAM RUANG'),
+(6,'BEM','MANAJEMEN LINGKUNGAN BANGUNAN');
 
 /*Table structure for table `q_type_1` */
 
@@ -358,7 +342,7 @@ CREATE TABLE `q_type_2` (
   `Label` varchar(100) DEFAULT NULL,
   `Point` float DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=latin1;
 
 /*Data for the table `q_type_2` */
 
@@ -432,14 +416,12 @@ CREATE TABLE `user` (
   `BuildingArea` float DEFAULT NULL COMMENT 'luas bangunan',
   `CreateAt` datetime NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user` */
 
 insert  into `user`(`ID`,`Name`,`Position`,`Email`,`Password`,`Hp`,`JobID`,`JobOther`,`ProjectName`,`Location`,`LandArea`,`BuildingArea`,`CreateAt`) values 
-(1,'','','','d41d8cd98f00b204e9800998ecf8427e',NULL,0,'','','',0,0,'2018-11-09 13:37:54'),
-(2,'','','','d41d8cd98f00b204e9800998ecf8427e',NULL,0,'','','',0,0,'2018-11-10 20:02:28'),
-(3,'','','','d41d8cd98f00b204e9800998ecf8427e',NULL,0,'','','',0,0,'2018-11-11 09:21:00');
+(1,'','','','d41d8cd98f00b204e9800998ecf8427e',NULL,0,'','','',0,0,'2018-11-09 13:37:54');
 
 /*Table structure for table `user_step_log` */
 

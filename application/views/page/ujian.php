@@ -2,6 +2,10 @@
 <?php //print_r($detailTitle); ?>
 <!--</pre>-->
 
+<?php
+//    print_r($this->session->all_userdata());
+//?>
+
 <style>
     #tableTitle tr td {
         font-size: 12px;
@@ -112,7 +116,7 @@
                     <div class="col-md-12" style="text-align: right;">
                         <span id="viewTotalPoint"></span>
                         <button class="btn btn-default" id="btnCekNilai">Cek Nilai</button>
-                        <button class="btn btn-success" id="btnNextQuestion" disabled>Simpan dan lanjutkan <i class="fa fa-angle-double-right fa-2x pull-right" style="margin-left: 15px;"></i></button>
+                        <button class="btn btn-success" id="btnNextQuestion" data-act="n" disabled>Simpan dan lanjutkan <i class="fa fa-angle-double-right fa-2x pull-right" style="margin-left: 15px;"></i></button>
                     </div>
                 </div>
             </div>
@@ -160,21 +164,32 @@
 
         $('#viewTotalPoint').html('');
 
-        if(parseInt(formIDTitle)==parseInt(formTotalTitle)){
-            $('#btnNextQuestion').html('Selesai');
-        }
-        else {
+        var act = $('#btnNextQuestion').attr('data-act');
 
-            $('#btnNextQuestion').prop('disabled',true);
-
-            var idNext = parseInt(formIDTitle) + 1;
-            $('#formIDTitle').val(idNext);
-            loadMenuBar();
-            loadQuestion();
-
-            if(parseInt(formTotalTitle)==idNext){
+        if(act=='n'){
+            if(parseInt(formIDTitle)==parseInt(formTotalTitle)){
+                $('#btnNextQuestion').attr('data-act','s');
                 $('#btnNextQuestion').html('Selesai');
             }
+            else {
+
+                $('#btnNextQuestion').prop('disabled',true);
+
+                checkPoint(parseInt(formIDTitle));
+
+                var idNext = parseInt(formIDTitle) + 1;
+                $('#formIDTitle').val(idNext);
+                loadMenuBar();
+                loadQuestion();
+
+                if(parseInt(formTotalTitle)==idNext){
+                    $('#btnNextQuestion').attr('data-act','s');
+                    $('#btnNextQuestion').html('Selesai');
+                }
+            }
+        } else if(act=='s'){
+            checkPoint(parseInt(formIDTitle));
+            window.location.replace(base_url_js+'save2pdf/certificate/');
         }
 
         setTimeout(function () {
@@ -184,6 +199,11 @@
 
     $(document).on('click','#btnCekNilai',function () {
 
+        checkPoint(1);
+
+    });
+
+    function checkPoint(IDTitle) {
         var totalPoint = 0;
 
         var formType1 = [];
@@ -242,16 +262,28 @@
             MaxPoint : MaxPoint,
             Percentage : Percentage,
             totalPoint : totalPoint
-
         };
 
         var url = base_url_js+'api/crudAnswer';
 
         $.post(url,{dataForm : dataForm},function (jsonResult) {
             $('#viewTotalPoint').html('Total Poin : '+jsonResult.TotalPoint+' - '+jsonResult.Percentage.toFixed(2)+' % | ');
-        });
+            var dataIns = {
+                action : 'insertAnswere',
+                dataInsert : {
+                    IDUser : parseInt("<?php echo $this->session->userdata('ID'); ?>"),
+                    IDTitle : IDTitle,
+                    TotalPoint : jsonResult.TotalPoint,
+                    Percentage : jsonResult.Percentage.toFixed(2),
+                    UpdateAt : dateTimeNow()
+                }
 
-    });
+            };
+            $.post(url,{dataForm:dataIns},function (result) {
+
+            });
+        });
+    }
 
     function loadMenuBar() {
 

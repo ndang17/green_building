@@ -22,8 +22,8 @@ class C_dashboard extends CI_Controller {
 
     public function index()
     {
-        $data['dataJob'] = $this->db->order_by('ID','ASC')->get('green.jobs')->result_array();
-        $data['dataCriteria'] = $this->db->order_by('ID','ASC')->get('green.eligibility_criteria')->result_array();
+        $data['dataJob'] = $this->db->order_by('ID','ASC')->get('apgt1743_green.jobs')->result_array();
+        $data['dataCriteria'] = $this->db->order_by('ID','ASC')->get('apgt1743_green.eligibility_criteria')->result_array();
         $page = $this->load->view('page/dashboard',$data,true);
         $this->temp($page);
     }
@@ -39,7 +39,7 @@ class C_dashboard extends CI_Controller {
         }
 
         // Cek apakah tahap ini sudah diisi atau belum
-//        $dataLog = $this->db->query('SELECT * FROM green.user_step_log usl WHERE usl.IDUser = 1 ')->result_array();
+//        $dataLog = $this->db->query('SELECT * FROM apgt1743_green.user_step_log usl WHERE usl.IDUser = 1 ')->result_array();
 
         $data['dataQuestion'] = $this->m_dashboard->__getQuestion($tahap);
 
@@ -50,11 +50,15 @@ class C_dashboard extends CI_Controller {
 
     public function ujian(){
 
+
+
         $email = $this->input->post('email');
 
-        if(!isset($email)){
-            $data['dataTitle'] = $this->db->order_by('ID','ASC')->limit(1)->get('green.q_title')->result_array()[0];
-            $data['detailTitle'] = $this->db->order_by('ID','ASC')->get('green.q_title')->result_array();
+//        print_r($email);
+
+        if(isset($email)){
+            $data['dataTitle'] = $this->db->order_by('ID','ASC')->limit(1)->get('apgt1743_green.q_title')->result_array()[0];
+            $data['detailTitle'] = $this->db->order_by('ID','ASC')->get('apgt1743_green.q_title')->result_array();
             $page = $this->load->view('page/ujian',$data,true);
             $this->tempBlank($page);
         } else {
@@ -70,7 +74,7 @@ class C_dashboard extends CI_Controller {
         $dataUser = $dataForm['dataUser'];
         $dataUser['Password'] = md5($dataUser['Password']);
 
-        $this->db->insert('green.user', $dataUser);
+        $this->db->insert('apgt1743_green.user', $dataUser);
         $insert_id = $this->db->insert_id();
 
         $dataAnsw = $dataForm['dataAnsw'];
@@ -78,9 +82,13 @@ class C_dashboard extends CI_Controller {
         if(count($dataAnsw)>0){
             for($i=0;$i<count($dataAnsw);$i++){
                 $dataAnsw[$i]['UserID']=$insert_id;
-                $this->db->insert('green.eligibility_criteria_answ', $dataAnsw[$i]);
+                $this->db->insert('apgt1743_green.eligibility_criteria_answ', $dataAnsw[$i]);
             }
         }
+
+        $dataUser['ID'] = $insert_id;
+
+        $this->session->set_userdata($dataUser);
 
         return print_r(1);
     }

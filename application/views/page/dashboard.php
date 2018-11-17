@@ -150,15 +150,15 @@
                                             <input type="text" id="formEmail" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="input-group">
-													<span class="input-group-addon">
-														<i class="fa fa-bars"></i>
-													</span>
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Password</label>
-                                            <input type="password" id="formPassword" class="form-control">
-                                        </div>
-                                    </div>
+<!--                                    <div class="input-group">-->
+<!--													<span class="input-group-addon">-->
+<!--														<i class="fa fa-bars"></i>-->
+<!--													</span>-->
+<!--                                        <div class="form-group label-floating">-->
+<!--                                            <label class="control-label">Password</label>-->
+<!--                                            <input type="password" id="formPassword" value="nandang" class="form-control">-->
+<!--                                        </div>-->
+<!--                                    </div>-->
                                     <div class="input-group">
 													<span class="input-group-addon">
 														<i class="fa fa-briefcase"></i>
