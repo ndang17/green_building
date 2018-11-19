@@ -65,8 +65,14 @@ class C_dashboard extends CI_Controller {
 
         }
 
-
     }
+
+    public function finish(){
+        $data = '';
+        $page = $this->load->view('page/finish',$data,true);
+        $this->temp($page);
+    }
+
 
     public function insertDataUser(){
         $dataForm = $this->input->post('dataForm');
@@ -87,6 +93,9 @@ class C_dashboard extends CI_Controller {
         }
 
         $dataUser['ID'] = $insert_id;
+
+        $ArrEx = explode(' ',$dataUser['CreateAt']);
+        $dataUser['StartAt'] = trim($ArrEx[1]);
 
         $this->session->set_userdata($dataUser);
 

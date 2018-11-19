@@ -18,8 +18,6 @@ class C_save_to_pdf extends CI_Controller {
         $dataPercentage = $this->db->get_where('apgt1743_green.user_step_log',
             array('IDUser' => $this->session->userdata('ID')))->result_array();
 
-
-
         $pdf = new FPDF('L','mm','A4');
 
 
@@ -58,11 +56,6 @@ class C_save_to_pdf extends CI_Controller {
 
         // ==== Resultnya ====
 
-//        $pdf->SetFillColor(239, 239, 239);
-//        $pdf->Rect(115,135,50,50,'FD');
-
-//        $pdf->SetFillColor(239, 239, 239);
-//        $pdf->Rect(115,135,50,50);
         $t1 = 0;
         $t2 = 0;
         $t3 = 0;
@@ -135,7 +128,7 @@ class C_save_to_pdf extends CI_Controller {
 
         $pdf->Image(base_url('assets/images/icon/logo_tr.png'),15,180,80);
 
-        $pdf->Output('Ijazah.pdf','I');
+        $pdf->Output('Sertifikat.pdf','I');
     }
     public function sertifikat2(){
 //        print_r($this->session->all_userdata());

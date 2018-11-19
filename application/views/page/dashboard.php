@@ -57,8 +57,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center" style="color: #ffffff;">
-                    <h2 style="margin-top: 0px;"><b>Penilaian Green Building</b>
-                        <br/> <small style="color: #ffffff;">Metode Greenship Rating Tools</small></h2>
+<!--                    <h2 style="margin-top: 0px;"><b>Penilaian Green Building</b>-->
+<!--                        <br/> <small style="color: #ffffff;">Metode Greenship Rating Tools</small></h2>-->
+                    <img src="<?php echo  base_url('assets/images/icon/logo_tr.png'); ?>" style="max-width: 500px;">
                 </div>
             </div>
         </div>
@@ -326,7 +327,7 @@
         // saveData();
         $('#modalMedium .modal-header,#modalMedium .modal-footer').addClass('hide');
         $('#modalMedium .modal-body').html('<div style="text-align:center ;">' +
-            '<h3>Mulai tahap pengujia sekarang?</h3>' +
+            '<h3>Mulai tahap pengujian sekarang?</h3>' +
             '<button class="btn btn-success" id="btnYes">Ya, mulai</button> ' +
             '<button class="btn btn-default"  data-dismiss="modal">Tidak, nanti saja</button>' +
             '</div>');

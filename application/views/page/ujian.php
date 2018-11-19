@@ -115,7 +115,7 @@
                 <div class="row">
                     <div class="col-md-12" style="text-align: right;">
                         <span id="viewTotalPoint"></span>
-                        <button class="btn btn-default" id="btnCekNilai">Cek Nilai</button>
+<!--                        <button class="btn btn-default" id="btnCekNilai">Cek Nilai</button>-->
                         <button class="btn btn-success" id="btnNextQuestion" data-act="n" disabled>Simpan dan lanjutkan <i class="fa fa-angle-double-right fa-2x pull-right" style="margin-left: 15px;"></i></button>
                     </div>
                 </div>
@@ -189,7 +189,8 @@
             }
         } else if(act=='s'){
             checkPoint(parseInt(formIDTitle));
-            window.location.replace(base_url_js+'save2pdf/certificate/');
+            window.location.replace(base_url_js+'finish');
+            // window.location.replace(base_url_js+'save2pdf/certificate/');
         }
 
         setTimeout(function () {
@@ -267,7 +268,7 @@
         var url = base_url_js+'api/crudAnswer';
 
         $.post(url,{dataForm : dataForm},function (jsonResult) {
-            $('#viewTotalPoint').html('Total Poin : '+jsonResult.TotalPoint+' - '+jsonResult.Percentage.toFixed(2)+' % | ');
+            // $('#viewTotalPoint').html('Total Poin : '+jsonResult.TotalPoint+' - '+jsonResult.Percentage.toFixed(2)+' % | ');
             var dataIns = {
                 action : 'insertAnswere',
                 dataInsert : {

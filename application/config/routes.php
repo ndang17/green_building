@@ -12,6 +12,7 @@ $route['__insertDataUser'] = 'c_dashboard/insertDataUser';
 // Pengujian
 $route['tahap-pengujian'] = 'c_dashboard/pengujian';
 $route['ujian'] = 'c_dashboard/ujian';
+$route['finish'] = 'c_dashboard/finish';
 
 
 // === ADMIN MASTER ===
