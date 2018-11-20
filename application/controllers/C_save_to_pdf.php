@@ -128,7 +128,8 @@ class C_save_to_pdf extends CI_Controller {
 
         $pdf->Image(base_url('assets/images/icon/logo_tr.png'),15,180,80);
 
-        $pdf->Output('Sertifikat.pdf','I');
+        $pdf->Output('D','Sertifikat.pdf');
+        $pdf->Output('I','Sertifikat.pdf');
     }
     public function sertifikat2(){
 //        print_r($this->session->all_userdata());

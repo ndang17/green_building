@@ -30,6 +30,19 @@ foreach ($dataPercentage AS $item){
 
 $totalPercentage = $t1 + $t2 + $t3 + $t4 + $t5 + $t6;
 
+    $ketD = 'Bronze';
+    $ketIcon = 'bronze2.png';
+    if($totalPercentage>=46 && $totalPercentage<=56){
+        $ketD = 'Silver';
+        $ketIcon = 'silver2.png';
+    } else if($totalPercentage>=57 && $totalPercentage<=72){
+        $ketD = 'Gold';
+        $ketIcon = 'gold2.png';
+    } else if($totalPercentage>=73){
+        $ketD = 'Platinum';
+        $ketIcon = 'platinum2.png';
+    }
+
 ?>
 
 <div class="image-container set-full-height" style="padding-top:30px;background-image: url('<?php echo base_url("assets/images/bg/wizard-book.jpg"); ?>');padding-bottom: 50px;">
@@ -44,19 +57,15 @@ $totalPercentage = $t1 + $t2 + $t3 + $t4 + $t5 + $t6;
                         </div>
 
                         <hr/>
-                        <h3>Neo Soho Building</h3>
+                        <h3><?php echo $this->session->userdata('ProjectName'); ?></h3>
 
-                        <p>
-                            Jl. Letjen S. Parman No.Kav. 28, RT.3/RW.5, Tj. Duren Sel., Grogol
-                            petamburan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta
-                            11470
-                        </p>
+                        <p><?php echo $this->session->userdata('Location'); ?></p>
 
                         <hr/>
 
                         <?php if($totalPercentage>=36) { ?>
-                            <img src="<?php echo base_url('assets/images/icon/bronze2.png'); ?>" style="max-width: 150px;">
-                            <h4 style="margin-bottom: 4px;">(65%)</h4>
+                            <img src="<?php echo base_url('assets/images/icon/'.$ketIcon); ?>" style="max-width: 150px;">
+                            <h4 style="margin-bottom: 4px;">(<?php echo $totalPercentage; ?>%)</h4>
                             <h3 style="margin-top: 0px;">Bronze</h3>
 
                             <div class="row" style="margin-top: 25px;">
@@ -69,42 +78,42 @@ $totalPercentage = $t1 + $t2 + $t3 + $t4 + $t5 + $t6;
                                                     AREA DASAR HIJAU
                                                 </td>
                                                 <td style="width: 1%;">:</td>
-                                                <td style="width: 7%;">16%</td>
+                                                <td style="width: 7%;"><?php echo $t1; ?>%</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: left;">
                                                     EFISIENSI DAN KONSERVASI ENERGI
                                                 </td>
                                                 <td>:</td>
-                                                <td>17%</td>
+                                                <td><?php echo $t2; ?>%</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: left;">
                                                     KONSERVASI AIR
                                                 </td>
                                                 <td>:</td>
-                                                <td>17%</td>
+                                                <td><?php echo $t3; ?>%</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: left;">
                                                     SUMBER DAN SIKLUS MATERIAL
                                                 </td>
                                                 <td>:</td>
-                                                <td>17%</td>
+                                                <td><?php echo $t4; ?>%</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: left;">
                                                     KESEHATAN DAN KENYAMANAN DALAM RUANG
                                                 </td>
                                                 <td>:</td>
-                                                <td>17%</td>
+                                                <td><?php echo $t5; ?>%</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: left;">
                                                     MANAJEMEN LINGKUNGAN BANGUNAN
                                                 </td>
                                                 <td>:</td>
-                                                <td>17%</td>
+                                                <td><?php echo $t6; ?>%</td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -115,15 +124,15 @@ $totalPercentage = $t1 + $t2 + $t3 + $t4 + $t5 + $t6;
                             <div class="row">
                                 <div class="col-md-12">
                                     <hr/>
-                                    <button class="btn btn-lg btn-primary">Download Sertifikat</button>
+                                    <button class="btn btn-lg btn-primary" id="downloadSertifikat">Download Sertifikat</button>
                                 </div>
                             </div>
-                         <?php } else { ?>
+                        <?php } else { ?>
 
                             <div class="row">
                                 <div class="col-md-12">
                                     <h3><?php echo '('.$totalPercentage.')'; ?>
-                                    <br/>
+                                        <br/>
                                         Tidak tersertifikasi | No Green Building
                                     </h3>
 
@@ -139,3 +148,9 @@ $totalPercentage = $t1 + $t2 + $t3 + $t4 + $t5 + $t6;
         </div>
     </div>
 </div>
+
+<script>
+    $(document).on('click','#downloadSertifikat',function () {
+        window.location.replace(base_url_js+'save2pdf/certificate');
+    });
+</script>
