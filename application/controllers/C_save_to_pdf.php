@@ -82,10 +82,10 @@ class C_save_to_pdf extends CI_Controller {
 
         $ketD = 'Bronze';
         $ketIcon = 'bronze2.png';
-        if($totalPercentage>=46 && $totalPercentage<=56){
+        if($totalPercentage>=46 && $totalPercentage<57){
             $ketD = 'Silver';
             $ketIcon = 'silver2.png';
-        } else if($totalPercentage>=57 && $totalPercentage<=72){
+        } else if($totalPercentage>=57 && $totalPercentage<73){
             $ketD = 'Gold';
             $ketIcon = 'gold2.png';
         } else if($totalPercentage>=73){

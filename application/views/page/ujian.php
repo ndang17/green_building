@@ -206,9 +206,9 @@
 
     function checkPoint(IDTitle) {
         var totalPoint = 0;
-
         var formType1 = [];
 
+        // Menghitung jumlah dan point soal type 1
         if(dataType1.length>0){
             for(var i=0;i<dataType1.length;i++){
                 var IDQ = dataType1[i];
@@ -221,13 +221,12 @@
                         IDQ : IDQ,
                         TotalChecked : TotalChecked
                     };
-
                     formType1.push(dataForm);
                 }
             }
         }
 
-
+        // Menghitung jumlah dan point soal type 2
         if(dataType2.length>0){
             for(var i2=0;i2<dataType2.length;i2++){
                 var d = $('input[type=radio][name=q_type2'+dataType2[i2]+']:checked').val();
@@ -236,6 +235,7 @@
             }
         }
 
+        // Menghitung jumlah dan point soal type 3
         if(dataType3.length>0){
             for(var i3=0;i3<dataType3.length;i3++){
                 var ID = dataType3[i3];
@@ -247,10 +247,8 @@
             }
         }
 
-
         var MaxPoint = parseFloat($('#formMaxPoint').val());
         var Percentage = parseFloat($('#formPercentage').val());
-
 
         var loadTP1 = (formType1.length>0) ? 1 : 0 ;
 
@@ -268,7 +266,6 @@
         var url = base_url_js+'api/crudAnswer';
 
         $.post(url,{dataForm : dataForm},function (jsonResult) {
-            // $('#viewTotalPoint').html('Total Poin : '+jsonResult.TotalPoint+' - '+jsonResult.Percentage.toFixed(2)+' % | ');
             var dataIns = {
                 action : 'insertAnswere',
                 dataInsert : {

@@ -30,15 +30,18 @@ foreach ($dataPercentage AS $item){
 
 $totalPercentage = $t1 + $t2 + $t3 + $t4 + $t5 + $t6;
 
+
     $ketD = 'Bronze';
     $ketIcon = 'bronze2.png';
-    if($totalPercentage>=46 && $totalPercentage<=56){
+    if((float)$totalPercentage>=46 && (float)$totalPercentage<57){
         $ketD = 'Silver';
         $ketIcon = 'silver2.png';
-    } else if($totalPercentage>=57 && $totalPercentage<=72){
+    }
+    else if((float)$totalPercentage>=57 && (float)$totalPercentage<73){
         $ketD = 'Gold';
         $ketIcon = 'gold2.png';
-    } else if($totalPercentage>=73){
+    }
+    else if((float)$totalPercentage>=73){
         $ketD = 'Platinum';
         $ketIcon = 'platinum2.png';
     }
@@ -66,7 +69,7 @@ $totalPercentage = $t1 + $t2 + $t3 + $t4 + $t5 + $t6;
                         <?php if($totalPercentage>=36) { ?>
                             <img src="<?php echo base_url('assets/images/icon/'.$ketIcon); ?>" style="max-width: 150px;">
                             <h4 style="margin-bottom: 4px;">(<?php echo $totalPercentage; ?>%)</h4>
-                            <h3 style="margin-top: 0px;">Bronze</h3>
+                            <h3 style="margin-top: 0px;"><?php echo $ketD; ?></h3>
 
                             <div class="row" style="margin-top: 25px;">
                                 <div class="col-md-8 col-md-offset-2">

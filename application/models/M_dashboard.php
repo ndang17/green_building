@@ -53,4 +53,35 @@ class M_dashboard extends CI_Model {
 
         return $result;
     }
+
+    public function getPercentage($IDUser){
+        $dataPercentage = $this->db->order_by('ID','ASC')->get_where('apgt1743_green.user_step_log',
+            array('IDUser' => $IDUser))->result_array();
+
+        $t1 = 0;
+        $t2 = 0;
+        $t3 = 0;
+        $t4 = 0;
+        $t5 = 0;
+        $t6 = 0;
+        foreach ($dataPercentage AS $item){
+            if($item['IDTitle']=='1'){
+                $t1 = $item['Percentage'];
+            } else if($item['IDTitle']=='2'){
+                $t2 = $item['Percentage'];
+            } else if($item['IDTitle']=='3'){
+                $t3 = $item['Percentage'];
+            } else if($item['IDTitle']=='4'){
+                $t4 = $item['Percentage'];
+            } else if($item['IDTitle']=='5'){
+                $t5 = $item['Percentage'];
+            } else if($item['IDTitle']=='6'){
+                $t6 = $item['Percentage'];
+            }
+        }
+
+        $totalPercentage = $t1 + $t2 + $t3 + $t4 + $t5 + $t6;
+
+        return $totalPercentage;
+    }
 }

@@ -3,6 +3,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class C_admin extends CI_Controller {
 
+    function __construct()
+    {
+        parent::__construct();
+
+        if(!$this->session->userdata('login')){
+            redirect(base_url());
+        }
+
+    }
+
     public function temp($page){
         $data['page'] = $page;
 
@@ -74,6 +84,11 @@ class C_admin extends CI_Controller {
         $page = $this->load->view('admin/statistik', $data, true);
         $this->temp($page);
 
+    }
+
+    public function out(){
+        session_destroy();
+        redirect(base_url());
     }
 
 }

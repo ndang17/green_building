@@ -20,14 +20,33 @@ class C_dashboard extends CI_Controller {
         $this->load->view('template/template_blank',$data);
     }
 
+    public function dash_menu($content){
+        $data['content'] = $content;
+        $page = $this->load->view('page/dashboard_menu',$data,true);
+        $this->temp($page);
+    }
+
     public function index()
     {
         $data['dataJob'] = $this->db->order_by('ID','ASC')->get('apgt1743_green.jobs')->result_array();
         $data['dataCriteria'] = $this->db->order_by('ID','ASC')->get('apgt1743_green.eligibility_criteria')->result_array();
         $page = $this->load->view('page/dashboard',$data,true);
-        $this->temp($page);
+        $this->dash_menu($page);
     }
 
+    public function pengguna(){
+        $dataPengguna = $this->db->order_by('ID','ASC')->get('apgt1743_green.user')->result_array();
+
+        for($i=0;$i<count($dataPengguna);$i++){
+            $perc = $this->m_dashboard->getPercentage($dataPengguna[$i]['ID']);
+            $dataPengguna[$i]['Percentage'] = $perc;
+        }
+
+        $data['dataPengguna'] = $dataPengguna;
+
+        $page = $this->load->view('page/pengguna',$data,true);
+        $this->dash_menu($page);
+    }
 
     public function pengujian()
     {
@@ -100,5 +119,32 @@ class C_dashboard extends CI_Controller {
         $this->session->set_userdata($dataUser);
 
         return print_r(1);
+    }
+
+
+    public function authLogin(){
+
+        $data_arr = $this->input->post('dataForm');
+
+        $Username = $data_arr['Username'];
+        $Password = md5($data_arr['Password']);
+
+        $dataUser = $this->db->query('SELECT * FROM apgt1743_green.admin
+                                          WHERE Username LIKE "'.$Username.'" 
+                                           AND Password = "'.$Password.'"')
+            ->result_array();
+
+        $result = array(
+            'Status' => (count($dataUser)>0) ? 1 : 0
+        );
+
+
+        header('Access-Control-Allow-Origin: *');
+        header('Content-Type: application/json');
+
+        $this->session->set_userdata('login','true');
+
+        return print_r(json_encode($result));
+
     }
 }

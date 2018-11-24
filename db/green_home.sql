@@ -16,6 +16,26 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`apgt1743_green` /*!40100 DEFAULT CHARAC
 
 USE `apgt1743_green`;
 
+/*Table structure for table `admin` */
+
+DROP TABLE IF EXISTS `admin`;
+
+CREATE TABLE `admin` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Username` varchar(20) DEFAULT NULL,
+  `Name` varchar(200) DEFAULT NULL,
+  `Password` varchar(255) DEFAULT NULL,
+  `PasswordTxt` varchar(255) DEFAULT NULL,
+  `LastLogin` datetime DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+/*Data for the table `admin` */
+
+insert  into `admin`(`ID`,`Username`,`Name`,`Password`,`PasswordTxt`,`LastLogin`) values 
+(1,'Admin','Rifai','7cf6ca99540d171dc10a791a339a0536','toor123',NULL),
+(2,'ndang','Nandang','202cb962ac59075b964b07152d234b70','123',NULL);
+
 /*Table structure for table `eligibility_criteria` */
 
 DROP TABLE IF EXISTS `eligibility_criteria`;
@@ -48,7 +68,7 @@ CREATE TABLE `eligibility_criteria_answ` (
   `EGID` int(11) NOT NULL,
   `Answer` enum('0','1') NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
 
 /*Data for the table `eligibility_criteria_answ` */
 
@@ -56,10 +76,6 @@ insert  into `eligibility_criteria_answ`(`ID`,`UserID`,`EGID`,`Answer`) values
 (1,1,1,'0'),
 (2,1,2,'0'),
 (3,1,3,'0'),
-(4,1,4,'0'),
-(5,1,5,'0'),
-(6,1,6,'0'),
-(7,1,7,'0'),
 (8,2,1,'0'),
 (9,2,2,'0'),
 (10,2,3,'0'),
@@ -101,7 +117,24 @@ insert  into `eligibility_criteria_answ`(`ID`,`UserID`,`EGID`,`Answer`) values
 (46,7,4,'1'),
 (47,7,5,'0'),
 (48,7,6,'1'),
-(49,7,7,'0');
+(49,7,7,'0'),
+(53,1,4,'1'),
+(54,1,5,'0'),
+(55,1,6,'1'),
+(57,2,1,'0'),
+(58,2,2,'0'),
+(59,2,3,'0'),
+(60,2,4,'0'),
+(61,2,5,'0'),
+(62,2,6,'1'),
+(63,2,7,'1'),
+(64,3,1,'0'),
+(65,3,2,'0'),
+(66,3,3,'0'),
+(67,3,4,'0'),
+(68,3,5,'0'),
+(69,3,6,'0'),
+(70,3,7,'0');
 
 /*Table structure for table `jobs` */
 
@@ -460,9 +493,13 @@ CREATE TABLE `user` (
   `BuildingArea` float DEFAULT NULL COMMENT 'luas bangunan',
   `CreateAt` datetime NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user` */
+
+insert  into `user`(`ID`,`Name`,`Position`,`Email`,`Password`,`Hp`,`JobID`,`JobOther`,`ProjectName`,`Location`,`LandArea`,`BuildingArea`,`CreateAt`) values 
+(1,'Meydita Nirmala P','IT','n@mail.com','d41d8cd98f00b204e9800998ecf8427e',NULL,1,'','Kuningan City','Jalan Kuningan Jakarta Selatan',300,200,'2018-11-19 21:00:29'),
+(2,'Nandang','i','n@mail.com','d41d8cd98f00b204e9800998ecf8427e',NULL,1,'','s','sa',20,30,'2018-11-20 09:50:47');
 
 /*Table structure for table `user_step_log` */
 
@@ -476,9 +513,23 @@ CREATE TABLE `user_step_log` (
   `Percentage` float(5,2) DEFAULT NULL,
   `UpdateAt` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user_step_log` */
+
+insert  into `user_step_log`(`ID`,`IDUser`,`IDTitle`,`TotalPoint`,`Percentage`,`UpdateAt`) values 
+(1,1,1,9.40,9.29,'2018-11-19 21:01:58'),
+(2,1,2,16.00,15.82,'2018-11-19 21:02:38'),
+(3,1,3,21.00,20.80,'2018-11-19 21:03:33'),
+(4,1,4,11.50,11.42,'2018-11-19 21:04:08'),
+(5,1,5,8.00,7.92,'2018-11-19 21:04:38'),
+(6,1,6,11.00,10.92,'2018-11-19 21:04:58'),
+(7,2,1,15.45,15.27,'2018-11-20 09:51:47'),
+(8,2,2,19.00,18.78,'2018-11-20 09:52:33'),
+(9,2,3,21.00,20.80,'2018-11-20 09:52:59'),
+(10,2,4,14.00,13.90,'2018-11-20 09:53:22'),
+(11,2,5,10.00,9.90,'2018-11-20 09:53:39'),
+(12,2,6,13.00,12.90,'2018-11-20 09:53:57');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

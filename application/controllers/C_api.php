@@ -10,6 +10,7 @@ class C_api extends CI_Controller {
         header('Content-Type: application/json');
 
         $this->load->model('m_api');
+        $this->load->model('m_dashboard');
     }
 
     public function getTitle(){
@@ -151,7 +152,6 @@ class C_api extends CI_Controller {
                 }
             }
 
-
             $dataPercentage = ($totalPoint>0) ? ($totalPoint/$MaxPoint) * $Percentage : 0;
 
             $result = array(
@@ -163,6 +163,7 @@ class C_api extends CI_Controller {
 
         }
         else if($data_arr['action']=='insertAnswere'){
+
             $dataInsert = (array) $data_arr['dataInsert'];
 
             // Cek apakah sudah insert apa belum jika sudah maka update
@@ -292,4 +293,106 @@ class C_api extends CI_Controller {
         }
     }
 
+    public function crudPengunjung(){
+
+        $data_arr = $this->input->post('dataForm');
+
+        if($data_arr['action']=='readPengunjung'){
+            $dataPengguna = $this->db->order_by('ID','ASC')->get('apgt1743_green.user')->result_array();
+            for($i=0;$i<count($dataPengguna);$i++){
+                $perc = $this->m_dashboard->getPercentage($dataPengguna[$i]['ID']);
+
+                $totalPercentage = $perc;
+                $ketD = '';
+                $ketIcon = '';
+                if((float)$totalPercentage>=36 && (float)$totalPercentage<46){
+                    $ketD = 'Bronze';
+                    $ketIcon = 'bronze2.png';
+                }
+                else if((float)$totalPercentage>=46 && (float)$totalPercentage<57){
+                    $ketD = 'Silver';
+                    $ketIcon = 'silver2.png';
+                }
+                else if((float)$totalPercentage>=57 && (float)$totalPercentage<73){
+                    $ketD = 'Gold';
+                    $ketIcon = 'gold2.png';
+                }
+                else if((float)$totalPercentage>=73){
+                    $ketD = 'Platinum';
+                    $ketIcon = 'platinum2.png';
+                }
+
+                $dataPengguna[$i]['Percentage'] = $perc;
+                $dataPengguna[$i]['Medali'] = $ketD;
+                $dataPengguna[$i]['MedaliIcon'] = $ketIcon;
+            }
+
+            return print_r(json_encode($dataPengguna));
+        }
+        else if($data_arr['action']=='deletePengunjung'){
+
+            $this->db->where('IDUser', $data_arr['IDUser']);
+            $this->db->delete('apgt1743_green.user_step_log');
+            $this->db->reset_query();
+
+            $this->db->where('ID', $data_arr['IDUser']);
+            $this->db->delete('apgt1743_green.user');
+
+            return print_r(1);
+        }
+        else if($data_arr['action']=='detailPengunjung'){
+
+            $data = $this->db->query('SELECT u.*, j.Description AS JobsDesc FROM apgt1743_green.user u
+                                              LEFT JOIN apgt1743_green.jobs j ON (j.ID = u.JobID) 
+                                              WHERE u.ID = "'.$data_arr['IDUser'].'" LIMIT 1 ')->result_array();
+
+            $dataEli = $this->db->query('SELECT ec.Description FROM apgt1743_green.eligibility_criteria_answ el_an
+                                                    LEFT JOIN apgt1743_green.eligibility_criteria ec 
+                                                    ON (el_an.EGID = ec.ID)
+                                                    WHERE el_an.UserID = "'.$data_arr['IDUser'].'"
+                                                     AND el_an.Answer = "1" ')->result_array();
+
+            $data[0]['Elig'] = $dataEli;
+
+            $dataPercentage = $this->db->query('SELECT usl.*, qt.Code, qt.Title FROM apgt1743_green.user_step_log usl
+                                                        LEFT JOIN apgt1743_green.q_title qt
+                                                        ON (qt.ID = usl.IDTitle)
+                                                        WHERE usl.IDUser = "'.$data_arr['IDUser'].'"
+                                                         ORDER BY qt.ID ASC')->result_array();
+
+            $data[0]['DetailLog'] = $dataPercentage;
+
+
+            return print_r(json_encode($data));
+
+        }
+
+    }
+
+    public function crudAdmin(){
+        $data_arr = $this->input->post('dataForm');
+
+        if($data_arr['action']=='readAdmin'){
+            $data = $this->db->order_by('ID','ASC')
+                ->get('apgt1743_green.admin')->result_array();
+
+            return print_r(json_encode($data));
+        }
+        else if($data_arr['action']=='addNewAdmin'){
+
+            $dataInsert = (array) $data_arr['dataInsert'];
+            $dataInsert['Password'] = md5($dataInsert['PasswordTxt']);
+
+            $this->db->insert('apgt1743_green.admin',$dataInsert);
+
+            return print_r(1);
+
+
+        }
+        else if($data_arr['action']=='deleteAdmin'){
+            $this->db->where('ID', $data_arr['ID']);
+            $this->db->delete('apgt1743_green.admin');
+            return print_r(1);
+        }
+    }
 }
